@@ -8,5 +8,7 @@ public class PlannerController {
     public void run(){
         OutputView.printStartMessage();
         int date = InputView.inputDate();
+
+        String menu = InputView.inputMenu();
     }
 }

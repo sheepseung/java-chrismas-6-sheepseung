@@ -12,4 +12,10 @@ public class InputView {
         return Parser.stringToIntPaser(input);
     }
 
+    public static String inputMenu(){
+        System.out.println(InputMessage.MENU_INPUT_MESSAGE.getMessage());
+        return Console.readLine();
+    }
+
+
 }
