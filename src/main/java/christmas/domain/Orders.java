@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Orders {
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orderDetails = new ArrayList<>();
 
     public Orders(String input){
         takeOrder(input);
@@ -24,13 +24,13 @@ public class Orders {
             int menuNumber = Integer.parseInt(menuInfo[1]);
 
             Order order = new Order(menu, menuNumber);
-            orders.add(order);
+            orderDetails.add(order);
         }
     }
 
     public String toString(){
         String output = "";
-        for(Order order : orders){
+        for(Order order : orderDetails){
             output += (order.getMenu().getName() + " " + order.getCount() + "개\n");
         }
 

@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Order;
 import christmas.domain.Orders;
 import christmas.domain.ReservationDay;
 import christmas.view.InputView;
@@ -12,8 +13,9 @@ public class PlannerController {
         int date = InputView.inputDate();
         ReservationDay day = new ReservationDay(date);
 
-        String orderedMenu = InputView.inputOrder();
-        Orders orders = new Orders(orderedMenu);
+        String orderInput = InputView.inputOrder();
+        Orders orders = new Orders(orderInput);
+
         OutputView.printEventPreviewMessage(day.getDay());
         OutputView.printOrderDetails(orders);
 
