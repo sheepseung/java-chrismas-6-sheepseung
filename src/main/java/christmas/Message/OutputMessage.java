@@ -6,11 +6,11 @@ public enum OutputMessage {
 
     private final String message;
 
-    OutputMessage(String message){
+    OutputMessage(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 }

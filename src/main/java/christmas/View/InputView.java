@@ -6,7 +6,7 @@ import christmas.Parser.Parser;
 
 public class InputView {
 
-    public static int inputDate(){
+    public static int inputDate() {
         System.out.println(InputMessage.DATE_INPUT_MESSAGE.getMessage());
         String input = Console.readLine();
         return Parser.stringToIntPaser(input);
