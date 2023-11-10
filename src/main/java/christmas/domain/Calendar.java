@@ -9,7 +9,4 @@ public class Calendar {
             .collect(Collectors.toList());
     private List<Integer> starDay = Stream.of(3, 10, 17, 24, 25, 31)
             .collect(Collectors.toList());
-
-
-
 }

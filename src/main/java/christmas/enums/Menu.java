@@ -34,4 +34,13 @@ public enum Menu {
     public BigDecimal getPrice() {
         return price;
     }
+
+    public static Menu findMenu(String menuName){
+        for (Menu menu : Menu.values()) {
+            if (menuName.equals(menu.getName())) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.ORDER_NON_EXISTENT_MENU_ERROR_MESSAGE.getMessage());
+    }
 }

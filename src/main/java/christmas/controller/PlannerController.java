@@ -1,11 +1,16 @@
 package christmas.controller;
 
-import christmas.domain.Order;
+import christmas.domain.Orders;
 import christmas.domain.ReservationDay;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class PlannerController {
+    private final Orders orders;
+
+    public PlannerController(){
+        this.orders = new Orders();
+    }
 
     public void run(){
         OutputView.printStartMessage();
@@ -13,6 +18,8 @@ public class PlannerController {
         ReservationDay day = new ReservationDay(date);
 
         String orderedMenu = InputView.inputOrder();
-        Order order = new Order(orderedMenu);
+        orders.takeOrder(orderedMenu);
+
+
     }
 }
