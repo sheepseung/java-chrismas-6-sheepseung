@@ -1,6 +1,6 @@
-package christmas.Parser;
+package christmas.parser;
 
-import christmas.Message.ErrorMessage;
+import christmas.message.ErrorMessage;
 
 public class Parser {
     public static int stringToIntPaser(String input) {

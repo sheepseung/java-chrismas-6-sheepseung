@@ -1,8 +1,9 @@
-package christmas.Message;
+package christmas.message;
 
 public enum ErrorMessage {
     INPUT_NOT_INTEGER_ERROR_MESSAGE("[ERROR] : 정확한 값을 입력해 주세요."),
-    INPUT_NULL_ERROR_MESSAGE("[ERROR] : 정확한 값을 입력해 주세요.");
+    INPUT_NULL_ERROR_MESSAGE("[ERROR] : 정확한 값을 입력해 주세요."),
+    INPUT_OVER_RANGE_ERROR_MESSAGE("[ERROR]: 날짜를 확인해 주세요");
 
     private final String message;
 

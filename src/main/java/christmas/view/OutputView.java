@@ -1,6 +1,6 @@
-package christmas.View;
+package christmas.view;
 
-import christmas.Message.OutputMessage;
+import christmas.message.OutputMessage;
 
 public class OutputView {
 
