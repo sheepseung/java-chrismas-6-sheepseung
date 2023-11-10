@@ -13,6 +13,6 @@ public class OutputView {
         System.out.printf(OutputMessage.EVENT_PREVIEW_OUTPUT_MESSAGE.getMessage(), day);
     }
     public static void printOrderDetails(Orders orders){
-        System.out.println(OutputMessage.ORDER_DETAILS_OUTPUT_MESSAGE.getMessage() + orders.toString());
+        System.out.print(OutputMessage.ORDER_DETAILS_OUTPUT_MESSAGE.getMessage() + orders.toString());
     }
 }
