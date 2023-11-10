@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Orders {
-    private List<Order> orderDetails = new ArrayList<>();
+    private final List<Order> orderDetails = new ArrayList<>();
 
     public Orders(String input){
         takeOrder(input);
