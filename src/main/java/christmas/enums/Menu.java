@@ -2,7 +2,7 @@ package christmas.enums;
 
 import java.math.BigDecimal;
 
-public enum Food {
+public enum Menu {
     APPETIZER_MUSHROOM_SOUP("양송이수프", new BigDecimal("6000")),
     APPETIZER_TAPAS("타파스", new BigDecimal("5500")),
     APPETIZER_CAESAR_SALAD("시저샐러드", new BigDecimal("8000")),
@@ -22,7 +22,7 @@ public enum Food {
     private final String name;
     private final BigDecimal price;
 
-    Food(String name, BigDecimal price) {
+    Menu(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }
