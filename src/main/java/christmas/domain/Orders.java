@@ -23,6 +23,7 @@ public class Orders {
         for (String orderInfo : eachOrder) {
             String[] menuInfo = orderInfo.split(EACH_ORDER_TO_PER_ORDER_REGEX);
             validFormat(menuInfo);
+            validDuplicateMenu(eachOrder, orderInfo);
 
             Order order = new Order(menuInfo[0], menuInfo[1]);
             orderDetails.add(order);
@@ -31,6 +32,10 @@ public class Orders {
 
     private void validFormat(String[] menuInfo){
         if(menuInfo.length != 2) throw new IllegalArgumentException(ErrorMessage.ORDER_DIFFERENT_FORMAT_ERROR_MESSAGE.getMessage());
+    }
+
+    private void validDuplicateMenu(List<String> eachOrder ,String orderInfo){
+        if(eachOrder.contains(orderInfo)) throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
     }
 
     public String toString() {
