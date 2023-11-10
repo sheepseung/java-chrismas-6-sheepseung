@@ -5,6 +5,7 @@ import christmas.enums.ErrorMessage;
 public class Parser {
     public static int stringToIntPaser(String input) {
         if (input.isBlank()) throw new IllegalArgumentException(ErrorMessage.INPUT_NULL_ERROR_MESSAGE.getMessage());
+
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
