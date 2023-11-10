@@ -2,13 +2,18 @@ package christmas.domain;
 
 import christmas.enums.Menu;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Orders {
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
-    public void takeOrder(String input){
+    public Orders(String input){
+        takeOrder(input);
+    }
+
+    private void takeOrder(String input){
         List<String> eachOrder = Arrays.stream(input.split(",")).toList();
 
         for(String orderInfo : eachOrder){
@@ -23,4 +28,12 @@ public class Orders {
         }
     }
 
+    public String toString(){
+        String output = "";
+        for(Order order : orders){
+            output += (order.getMenu().getName() + " " + order.getCount() + "개\n");
+        }
+
+        return output;
+    }
 }

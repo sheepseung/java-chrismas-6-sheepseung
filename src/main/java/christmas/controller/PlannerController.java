@@ -6,11 +6,6 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class PlannerController {
-    private final Orders orders;
-
-    public PlannerController(){
-        this.orders = new Orders();
-    }
 
     public void run(){
         OutputView.printStartMessage();
@@ -18,8 +13,9 @@ public class PlannerController {
         ReservationDay day = new ReservationDay(date);
 
         String orderedMenu = InputView.inputOrder();
-        orders.takeOrder(orderedMenu);
-
+        Orders orders = new Orders(orderedMenu);
+        OutputView.printEventPreviewMessage(day.getDay());
+        OutputView.printOrderDetails(orders);
 
     }
 }
