@@ -1,6 +1,6 @@
 package christmas.parser;
 
-import christmas.message.ErrorMessage;
+import christmas.enums.ErrorMessage;
 
 public class Parser {
     public static int stringToIntPaser(String input) {

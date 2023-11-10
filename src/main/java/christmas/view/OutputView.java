@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.message.OutputMessage;
+import christmas.enums.OutputMessage;
 
 public class OutputView {
 

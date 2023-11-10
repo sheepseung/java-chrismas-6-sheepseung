@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.message.ErrorMessage;
+import christmas.enums.ErrorMessage;
 
 public class ReservationDay {
     private final int day;

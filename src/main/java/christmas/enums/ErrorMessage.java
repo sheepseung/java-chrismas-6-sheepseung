@@ -1,4 +1,4 @@
-package christmas.message;
+package christmas.enums;
 
 public enum ErrorMessage {
     INPUT_NOT_INTEGER_ERROR_MESSAGE("[ERROR] : 정확한 값을 입력해 주세요."),
