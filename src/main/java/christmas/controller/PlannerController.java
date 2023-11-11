@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Bill;
 import christmas.domain.Order;
 import christmas.dto.ReservationDay;
 import christmas.view.InputView;
@@ -16,6 +17,9 @@ public class PlannerController {
 
         OutputView.printEventPreviewMessage(reservationDay.getDay());
         OutputView.printOrderDetails(order);
+
+        Bill bill = new Bill(order);
+
     }
 
     private void inputDay() {
