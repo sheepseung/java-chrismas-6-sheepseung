@@ -8,14 +8,12 @@ public class InputView {
 
     public static int inputDate() {
         System.out.println(InputMessage.DATE_INPUT_MESSAGE.getMessage());
-        String input = Console.readLine().trim();
+        String input = Console.readLine();
         return Parser.stringToIntPaser(input);
     }
 
     public static String inputOrder(){
         System.out.println(InputMessage.MENU_INPUT_MESSAGE.getMessage());
-        return Console.readLine().trim();
+        return Console.readLine();
     }
-
-
 }

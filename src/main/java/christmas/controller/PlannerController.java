@@ -1,13 +1,13 @@
 package christmas.controller;
 
-import christmas.domain.Orders;
+import christmas.domain.Order;
 import christmas.domain.ReservationDay;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class PlannerController {
     ReservationDay reservationDay;
-    Orders orders;
+    Order order;
 
     public void run() {
         OutputView.printStartMessage();
@@ -15,7 +15,7 @@ public class PlannerController {
         inputOrder();
 
         OutputView.printEventPreviewMessage(reservationDay.getDay());
-        OutputView.printOrderDetails(orders);
+        OutputView.printOrderDetails(order);
     }
 
     private void inputDay() {
@@ -25,6 +25,6 @@ public class PlannerController {
 
     private void inputOrder() {
         String orderInput = InputView.inputOrder();
-        orders = new Orders(orderInput);
+        order = new Order(orderInput.replace(" ", ""));
     }
 }
