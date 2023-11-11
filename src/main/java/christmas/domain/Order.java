@@ -12,6 +12,7 @@ public class Order {
 
     public Order(String input) {
         takeOrder(input);
+        validOnlyBeverage();
     }
 
     private void takeOrder(String input) {
@@ -30,6 +31,15 @@ public class Order {
             if(order.getMenu().getMenuItem().getName().equals(menuName))
                 throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
         }
+    }
+
+    private void validOnlyBeverage(){
+        for(OrderedMenu order : orderDetails){
+            if(!order.getMenu().getMenuItem()
+                    .getMenuType().equals("beverage")) return;
+        }
+
+        throw new IllegalArgumentException(ErrorMessage.ORDER_ONLY_BEVERAGE_ERROR_MESSAGE.getMessage());
     }
 
     public String toString() {

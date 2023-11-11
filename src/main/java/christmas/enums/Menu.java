@@ -5,7 +5,7 @@ import christmas.dto.MenuItem;
 import java.math.BigDecimal;
 
 public enum Menu {
-    MUSHROOM_SOUP(new MenuItem("양송이수프", "appetizer"), new BigDecimal("6000")),
+    APPETIZER_MUSHROOM_SOUP(new MenuItem("양송이수프", "appetizer"), new BigDecimal("6000")),
     APPETIZER_TAPAS(new MenuItem("타파스", "appetizer"), new BigDecimal("5500")),
     APPETIZER_CAESAR_SALAD(new MenuItem("시저샐러드", "appetizer"), new BigDecimal("8000")),
 
