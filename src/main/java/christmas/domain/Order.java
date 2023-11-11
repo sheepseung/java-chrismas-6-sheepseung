@@ -2,15 +2,12 @@ package christmas.domain;
 
 import christmas.dto.OrderedMenu;
 import christmas.enums.ErrorMessage;
+import christmas.parser.Parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Order {
-    private final static String INPUT_TO_EACH_ORDER_REGEX = ",";
-    private final static String EACH_ORDER_TO_PER_ORDER_REGEX = "-";
-
     private final List<OrderedMenu> orderDetails = new ArrayList<>();
 
     public Order(String input) {
@@ -18,20 +15,14 @@ public class Order {
     }
 
     private void takeOrder(String input) {
-        List<String> eachOrder = Arrays.stream(input.split(INPUT_TO_EACH_ORDER_REGEX)).toList();
+        List<String> eachOrder = Parser.inputToEachOrder(input);
 
         for (String orderInfo : eachOrder) {
-            String[] menuInfo = orderInfo.split(EACH_ORDER_TO_PER_ORDER_REGEX);
-            validFormat(menuInfo);
+            String[] menuInfo = Parser.inputToMenu(orderInfo);
 
             validDuplicateMenu(orderDetails, menuInfo[0]);
-            OrderedMenu order = new OrderedMenu(menuInfo[0], menuInfo[1]);
-            orderDetails.add(order);
+            orderDetails.add(new OrderedMenu(menuInfo[0], menuInfo[1]));
         }
-    }
-
-    private void validFormat(String[] menuInfo){
-        if(menuInfo.length != 2) throw new IllegalArgumentException(ErrorMessage.ORDER_DIFFERENT_FORMAT_ERROR_MESSAGE.getMessage());
     }
 
     private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName){
