@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderTest {
     Order testOrder = new Order("양송이수프-1,티본스테이크-2,초코케이크-3");
+
     @Test
     public void testTakeOrderAndToString() {
         List<OrderedMenu> orderDetails = testOrder.getOrderDetails();

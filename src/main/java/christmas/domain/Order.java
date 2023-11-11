@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Order {
     private final List<OrderedMenu> orderDetails = new ArrayList<>();
+    private static final String NON_PERMIT_SINGLE_MENU_TYPE = "beverage";
 
     public Order(String input) {
         takeOrder(input);
@@ -26,17 +27,17 @@ public class Order {
         }
     }
 
-    private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName){
-        for(OrderedMenu order : orderDetails){
-            if(order.getMenu().getMenuItem().getName().equals(menuName))
+    private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName) {
+        for (OrderedMenu order : orderDetails) {
+            if (order.getMenu().getMenuItem().getName().equals(menuName))
                 throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
         }
     }
 
-    private void validOnlyBeverage(){
-        for(OrderedMenu order : orderDetails){
-            if(!order.getMenu().getMenuItem()
-                    .getMenuType().equals("beverage")) return;
+    private void validOnlyBeverage() {
+        for (OrderedMenu order : orderDetails) {
+            if (!order.getMenu().getMenuItem()
+                    .getMenuType().equals(NON_PERMIT_SINGLE_MENU_TYPE)) return;
         }
 
         throw new IllegalArgumentException(ErrorMessage.ORDER_ONLY_BEVERAGE_ERROR_MESSAGE.getMessage());
@@ -50,7 +51,7 @@ public class Order {
         return output;
     }
 
-    public List<OrderedMenu> getOrderDetails(){
+    public List<OrderedMenu> getOrderDetails() {
         return orderDetails;
     }
 }

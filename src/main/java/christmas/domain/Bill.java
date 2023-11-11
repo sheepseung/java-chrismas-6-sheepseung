@@ -15,7 +15,7 @@ public class Bill {
     private BigDecimal totalPrice = new BigDecimal(0);
     private int quantity = 0;
 
-    public Bill(Order order){
+    public Bill(Order order) {
         this.order = order;
         calculateTotalPrice();
         calculateMenuQuantity();
@@ -24,31 +24,31 @@ public class Bill {
         validMaximumQuantity();
     }
 
-    private void calculateTotalPrice(){
-        for(OrderedMenu orderedMenu : order.getOrderDetails()){
+    private void calculateTotalPrice() {
+        for (OrderedMenu orderedMenu : order.getOrderDetails()) {
             BigDecimal price = (orderedMenu.getMenu().getPrice())
                     .multiply(BigDecimal.valueOf(orderedMenu.getCount()));
             totalPrice = totalPrice.add(price);
         }
     }
 
-    private void calculateMenuQuantity(){
-        for(OrderedMenu orderedMenu : order.getOrderDetails()){
+    private void calculateMenuQuantity() {
+        for (OrderedMenu orderedMenu : order.getOrderDetails()) {
             quantity += orderedMenu.getCount();
         }
     }
 
-    private void validMinimumAmount(){
-        if(totalPrice.compareTo(new BigDecimal(MINIMUM_AMOUNT)) != 1)
+    private void validMinimumAmount() {
+        if (totalPrice.compareTo(new BigDecimal(MINIMUM_AMOUNT)) != 1)
             throw new IllegalArgumentException(ErrorMessage.MINIMUM_ORDER_AMOUNT_ERROR_MESSAGE.getMessage());
     }
 
-    private void validMaximumQuantity(){
-        if(quantity > MAXIMUM_QUANTITY)
+    private void validMaximumQuantity() {
+        if (quantity > MAXIMUM_QUANTITY)
             throw new IllegalArgumentException(ErrorMessage.MAXIMUM_ORDER_QUANTITY_ERROR_MESSAGE.getMessage());
     }
 
-    public String getTotalPrice(){
+    public String getTotalPrice() {
         return DECIMAL_FORMAT.format(totalPrice);
     }
 }

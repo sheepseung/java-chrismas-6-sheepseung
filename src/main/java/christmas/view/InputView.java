@@ -12,7 +12,7 @@ public class InputView {
         return Parser.stringToIntPaser(input);
     }
 
-    public static String inputOrder(){
+    public static String inputOrder() {
         System.out.println(InputMessage.MENU_INPUT_MESSAGE.getMessage());
         return Console.readLine();
     }

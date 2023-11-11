@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.enums.ErrorMessage;
 import christmas.enums.Menu;
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -13,6 +14,7 @@ public class BillTest {
 
     Order testOrder = new Order("양송이수프-1,티본스테이크-2,초코케이크-3");
     Bill bill = new Bill(testOrder);
+
     @Test
     public void testBillTotalPriceCalculation() {
         BigDecimal expectedTotalPrice = BigDecimal
