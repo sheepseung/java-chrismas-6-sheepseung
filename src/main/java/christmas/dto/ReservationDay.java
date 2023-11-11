@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.dto;
 
 import christmas.enums.ErrorMessage;
 

@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Order;
-import christmas.domain.ReservationDay;
+import christmas.dto.ReservationDay;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
