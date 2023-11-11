@@ -38,4 +38,8 @@ public class Order {
         }
         return output;
     }
+
+    public List<OrderedMenu> getOrderDetails(){
+        return orderDetails;
+    }
 }
