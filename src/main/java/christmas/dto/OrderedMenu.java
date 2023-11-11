@@ -1,14 +1,14 @@
-package christmas.domain;
+package christmas.dto;
 
 import christmas.enums.ErrorMessage;
 import christmas.enums.Menu;
 import christmas.parser.Parser;
 
-public class Order {
+public class OrderedMenu {
     private Menu menu;
     private int count;
 
-    public Order(String menu, String count) {
+    public OrderedMenu(String menu, String count) {
         int countValue = Parser.stringToIntPaser(count);
         Menu menuValue = Menu.findMenu(menu);
 
