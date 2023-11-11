@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.dto.OrderedMenu;
+import christmas.enums.ErrorMessage;
 
 import java.math.BigDecimal;
 
@@ -35,11 +36,11 @@ public class Bill {
 
     private void validMinimumAmount(){
         if(totalPrice.compareTo(new BigDecimal(MINIMUM_AMOUNT)) == -1)
-            throw new IllegalArgumentException("[ERROR] : 최소 주문 금액을 확인해주세요.");
+            throw new IllegalArgumentException(ErrorMessage.MINIMUM_ORDER_AMOUNT_ERROR_MESSAGE.getMessage());
     }
 
     private void validMaximumQuantity(){
         if(quantity > MAXIMUM_QUANTITY)
-            throw new IllegalArgumentException("[ERROR] : 최대 20개 까지 주문 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.MAXIMUM_ORDER_QUANTITY_ERROR_MESSAGE.getMessage());
     }
 }
