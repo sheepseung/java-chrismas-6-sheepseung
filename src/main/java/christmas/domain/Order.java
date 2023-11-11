@@ -27,14 +27,15 @@ public class Order {
 
     private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName){
         for(OrderedMenu order : orderDetails){
-            if(order.getMenu().getName().equals(menuName)) throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
+            if(order.getMenu().getMenuItem().getName().equals(menuName))
+                throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
         }
     }
 
     public String toString() {
         String output = "";
         for (OrderedMenu order : orderDetails) {
-            output += (order.getMenu().getName() + " " + order.getCount() + "개\n");
+            output += (order.getMenu().getMenuItem().getName() + " " + order.getCount() + "개\n");
         }
         return output;
     }

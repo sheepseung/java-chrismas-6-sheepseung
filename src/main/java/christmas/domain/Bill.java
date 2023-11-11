@@ -11,7 +11,6 @@ public class Bill {
     private static final int MAXIMUM_QUANTITY = 20;
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###");
 
-
     private final Order order;
     private BigDecimal totalPrice = new BigDecimal(0);
     private int quantity = 0;

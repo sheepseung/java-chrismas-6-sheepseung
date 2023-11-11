@@ -18,8 +18,9 @@ public class OrderedMenu {
         this.count = countValue;
     }
 
-    private void validateCount(int count){
-        if(count < 0) throw new IllegalArgumentException(ErrorMessage.ORDER_UNDER_ZERO_NUMBER_ERROR_MESSAGE.getMessage());
+    private void validateCount(int count) {
+        if (count < 0)
+            throw new IllegalArgumentException(ErrorMessage.ORDER_UNDER_ZERO_NUMBER_ERROR_MESSAGE.getMessage());
     }
 
     public Menu getMenu() {
