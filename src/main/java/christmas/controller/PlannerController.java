@@ -9,6 +9,7 @@ import christmas.view.OutputView;
 public class PlannerController {
     ReservationDay reservationDay;
     Order order;
+    Bill bill;
 
     public void run() {
         OutputView.printStartMessage();
@@ -18,8 +19,8 @@ public class PlannerController {
         OutputView.printEventPreviewMessage(reservationDay.getDay());
         OutputView.printOrderDetails(order);
 
-        Bill bill = new Bill(order);
-
+        bill = new Bill(order);
+        OutputView.printPriceBeforeDiscount(bill);
     }
 
     private void inputDay() {
