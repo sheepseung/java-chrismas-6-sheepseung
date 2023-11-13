@@ -4,6 +4,7 @@ import christmas.domain.Bill;
 import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
 import christmas.dto.ReservationDay;
+import christmas.enums.Badge;
 import christmas.enums.OutputMessage;
 import christmas.view.OutputView;
 
@@ -19,6 +20,7 @@ public class ChrismasEventController implements EventController {
     private static final int SPECIAL_DAY_DISCOUNT_VALUE = 1000;
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
+
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###");
 
     private String discountDetails = "";
@@ -122,20 +124,17 @@ public class ChrismasEventController implements EventController {
     }
 
     private void addContentsSpecialDayDiscountEvent(BigDecimal discountValue) {
-        if (discountValue.compareTo(new BigDecimal(0)) != 0) {
+        if (discountValue.compareTo(new BigDecimal(0)) == 1) {
             String discountDetail = (OutputMessage.SPECIAL_DAY_DISCOUNT_MESSAGE.getMessage()
                     + DECIMAL_FORMAT.format(discountValue) + "원\n");
             discountDetails += discountDetail;
         }
     }
 
-    public void badgeEvent() {
-
-    }
-
     public void showEventDiscountDetails() {
         OutputView.printPresentDetails(canPresent);
         OutputView.printEventDiscountDetails(discountDetails);
         OutputView.printTotalBenefitAmount(totalBenefitAmount);
+        OutputView.printBadge(Badge.getBadge(totalBenefitAmount));
     }
 }
