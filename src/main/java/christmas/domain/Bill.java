@@ -48,6 +48,10 @@ public class Bill {
             throw new IllegalArgumentException(ErrorMessage.MAXIMUM_ORDER_QUANTITY_ERROR_MESSAGE.getMessage());
     }
 
+    public void discountPrice(BigDecimal discountValue){
+        totalPrice.subtract(discountValue);
+    }
+
     public String getTotalPrice() {
         return DECIMAL_FORMAT.format(totalPrice);
     }
