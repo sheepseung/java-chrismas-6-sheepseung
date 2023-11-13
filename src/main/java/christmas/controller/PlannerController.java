@@ -6,12 +6,15 @@ import christmas.dto.ReservationDay;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
+import java.math.BigDecimal;
+
 public class PlannerController {
     private ReservationDay reservationDay;
     private Order order = new Order();
     private Bill bill;
     private final EventController eventController;
 
+    private final BigDecimal EVENT_APPLY_STANDARD_PRICE = new BigDecimal(10000);
     public PlannerController(EventController eventController) {
         this.eventController = eventController;
     }
@@ -27,8 +30,10 @@ public class PlannerController {
         bill = new Bill(order);
         OutputView.printPriceBeforeDiscount(bill);
 
-        eventController.applyEvent(reservationDay, order, bill);
-        eventController.showEventDiscountDetails();
+        if(bill.getTotalPrice().compareTo(EVENT_APPLY_STANDARD_PRICE) >= 0) {
+            eventController.applyEvent(reservationDay, order, bill);
+            eventController.showEventDiscountDetails();
+        }
 
         OutputView.printPriceAfterDiscount(bill);
     }
