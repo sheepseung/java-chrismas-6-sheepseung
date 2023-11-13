@@ -48,10 +48,12 @@ public class ChrismasEventController implements EventController {
 
     public void weekdayDiscountEvent(ReservationDay day, Order order, Bill bill) {
         if (decemberCalendar.isWeekday(day.getDay())) {
-            long dessertCount = order.getOrderDetails().stream()
+            long count = order.getOrderDetails().stream()
                     .filter(orderedMenu -> WEEKDAY_DISCOUNT_TYPE.equals(orderedMenu.getMenu().getMenuItem().getMenuType()))
-                    .count();
-            BigDecimal discountValue = new BigDecimal(dessertCount * STAND_DISCOUNT_VALUE);
+                    .mapToLong(orderedMenu -> orderedMenu.getCount())
+                    .sum();
+
+            BigDecimal discountValue = new BigDecimal(count * STAND_DISCOUNT_VALUE);
 
             bill.discountPrice(discountValue);
             addContentsWeekdayDiscountEvent(discountValue);
@@ -70,7 +72,8 @@ public class ChrismasEventController implements EventController {
         if (decemberCalendar.isWeekend(day.getDay())) {
             long mainDishCount = order.getOrderDetails().stream()
                     .filter(orderedMenu -> WEEKEND_DISCOUNT_TYPE.equals(orderedMenu.getMenu().getMenuItem().getMenuType()))
-                    .count();
+                    .mapToLong(orderedMenu -> orderedMenu.getCount())
+                    .sum();
             BigDecimal discountValue = new BigDecimal(mainDishCount * STAND_DISCOUNT_VALUE);
 
             bill.discountPrice(discountValue);
