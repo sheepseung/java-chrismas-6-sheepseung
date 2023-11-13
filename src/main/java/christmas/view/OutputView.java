@@ -21,4 +21,8 @@ public class OutputView {
     public static void printPriceBeforeDiscount(Bill bill) {
         System.out.printf(OutputMessage.BEFORE_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(), bill.getTotalPrice());
     }
+
+    public static void printPriceAfterDiscount(Bill bill){
+        System.out.printf(OutputMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(), bill.getTotalPrice());
+    }
 }
