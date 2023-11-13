@@ -17,7 +17,7 @@ public class DecemberCalendar {
         return false;
     }
 
-    public boolean isWeekendDay(int day){
+    public boolean isWeekend(int day){
         if(weekends.contains(day)) return true;
         return false;
     }

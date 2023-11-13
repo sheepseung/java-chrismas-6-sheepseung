@@ -25,4 +25,10 @@ public class OutputView {
     public static void printPriceAfterDiscount(Bill bill){
         System.out.printf(OutputMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(), bill.getTotalPrice());
     }
+
+    public static void printEventDiscountDetails(String discountDetails){
+        if(discountDetails.isBlank()) discountDetails = OutputMessage.NO_APPLIED_VALUE.getMessage();
+
+        System.out.println(OutputMessage.EVENT_DISCOUNT_CONTENTS_MESSAGE.getMessage() + discountDetails);
+    }
 }

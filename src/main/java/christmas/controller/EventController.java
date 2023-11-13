@@ -8,5 +8,9 @@ public interface EventController {
 
     void dDayDiscountEvent(ReservationDay reservationDay, Bill bill);
 
-    void weekDayDiscountEvent(ReservationDay reservationDay, Order order, Bill bill);
+    void weekdayDiscountEvent(ReservationDay reservationDay, Order order, Bill bill);
+
+    void weekendDiscountEvent(ReservationDay reservationDay, Order order, Bill bill);
+
+    void showEventDiscountDetails();
 }
