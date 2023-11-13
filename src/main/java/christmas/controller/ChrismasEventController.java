@@ -2,26 +2,19 @@ package christmas.controller;
 
 import christmas.domain.Bill;
 import christmas.domain.DecemberCalendar;
-import christmas.domain.Order;
 import christmas.dto.ReservationDay;
-
 import java.math.BigDecimal;
 
 public class ChrismasEventController implements EventController{
-    private static final int D_DAY_DISCOUNT_VALUE = 1000;
+    private static final int D_DAY_DISCOUNT_START_VALUE = 1000;
+    private static final int D_DAY_DISCOUNT_VALUE = 100;
 
-    private final DecemberCalendar decemberCalendar;
-    private final Order order;
-    private final Bill bill;
+    private final DecemberCalendar decemberCalendar = new DecemberCalendar();
 
-    public ChrismasEventController(Order order) {
-        this.decemberCalendar = new DecemberCalendar();
-        this.order = order;
-        this.bill = new Bill(order);
-    }
+    public void dDayDiscountEvent(ReservationDay reservationDay, Bill bill){
+        BigDecimal discountValue = new BigDecimal(D_DAY_DISCOUNT_START_VALUE +
+                (reservationDay.getDay() * D_DAY_DISCOUNT_VALUE));
 
-    public void dDayDiscountEvent(ReservationDay reservationDay){
-        BigDecimal discountValue = new BigDecimal(reservationDay.getDay() * D_DAY_DISCOUNT_VALUE);
         bill.discountPrice(discountValue);
     }
 

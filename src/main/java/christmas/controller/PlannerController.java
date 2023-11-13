@@ -8,14 +8,12 @@ import christmas.view.OutputView;
 
 public class PlannerController {
     private ReservationDay reservationDay;
+    private Order order = new Order();
     private Bill bill;
-
-    private final Order order;
     private final EventController eventController;
 
-    public PlannerController(EventController eventController, Order order){
+    public PlannerController(EventController eventController) {
         this.eventController = eventController;
-        this.order = order;
     }
 
     public void run() {
@@ -28,6 +26,9 @@ public class PlannerController {
 
         bill = new Bill(order);
         OutputView.printPriceBeforeDiscount(bill);
+
+        eventController.dDayDiscountEvent(reservationDay, bill);
+        OutputView.printPriceAfterDiscount(bill);
     }
 
     private void inputDay() {
