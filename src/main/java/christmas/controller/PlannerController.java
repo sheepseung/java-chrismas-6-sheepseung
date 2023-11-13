@@ -27,10 +27,8 @@ public class PlannerController {
         bill = new Bill(order);
         OutputView.printPriceBeforeDiscount(bill);
 
-        eventController.dDayDiscountEvent(reservationDay, bill);
-        eventController.weekdayDiscountEvent(reservationDay, order, bill);
+        eventController.applyEvent(reservationDay, order, bill);
         eventController.showEventDiscountDetails();
-        eventController.weekendDiscountEvent(reservationDay, order, bill);
 
         OutputView.printPriceAfterDiscount(bill);
     }
