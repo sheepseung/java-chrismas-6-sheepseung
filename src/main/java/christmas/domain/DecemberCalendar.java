@@ -9,4 +9,12 @@ public class DecemberCalendar {
             .collect(Collectors.toList());
     private final List<Integer> starDay = Stream.of(3, 10, 17, 24, 25, 31)
             .collect(Collectors.toList());
+
+    public List<Integer> getWeekendDays(){
+        return weekends;
+    }
+
+    public List<Integer> getStarDay(){
+        return starDay;
+    }
 }
