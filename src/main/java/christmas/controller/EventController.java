@@ -1,2 +1,4 @@
-package christmas.controller;public interface EventController {
+package christmas.controller;
+
+public interface EventController {
 }

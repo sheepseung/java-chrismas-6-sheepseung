@@ -7,9 +7,16 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class PlannerController {
-    ReservationDay reservationDay;
-    Order order;
-    Bill bill;
+    private ReservationDay reservationDay;
+    private Bill bill;
+
+    private final Order order;
+    private final EventController eventController;
+
+    public PlannerController(EventController eventController, Order order){
+        this.eventController = eventController;
+        this.order = order;
+    }
 
     public void run() {
         OutputView.printStartMessage();
@@ -30,6 +37,6 @@ public class PlannerController {
 
     private void inputOrder() {
         String orderInput = InputView.inputOrder();
-        order = new Order(orderInput.replace(" ", ""));
+        order.takeOrder(orderInput.replace(" ", ""));
     }
 }

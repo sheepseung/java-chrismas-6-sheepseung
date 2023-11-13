@@ -11,12 +11,7 @@ public class Order {
     private final List<OrderedMenu> orderDetails = new ArrayList<>();
     private static final String NON_PERMIT_SINGLE_MENU_TYPE = "beverage";
 
-    public Order(String input) {
-        takeOrder(input);
-        validOnlyBeverage();
-    }
-
-    private void takeOrder(String input) {
+    public void takeOrder(String input) {
         List<String> eachOrder = Parser.inputToEachOrder(input);
 
         for (String orderInfo : eachOrder) {
@@ -25,6 +20,8 @@ public class Order {
             validDuplicateMenu(orderDetails, menuInfo[0]);
             orderDetails.add(new OrderedMenu(menuInfo[0], menuInfo[1]));
         }
+
+        validOnlyBeverage();
     }
 
     private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName) {
