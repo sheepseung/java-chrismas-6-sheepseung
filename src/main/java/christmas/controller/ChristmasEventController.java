@@ -5,6 +5,7 @@ import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
 import christmas.dto.ReservationDay;
 import christmas.enums.Badge;
+import christmas.enums.EventSettings;
 import christmas.enums.OutputMessage;
 import christmas.view.EventView;
 
@@ -12,15 +13,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 public class ChristmasEventController implements EventController {
-    private static final BigDecimal PRESENT_STANDARD_AMOUNT = new BigDecimal(120000);
-    private static final BigDecimal PRESENT_VALUE = new BigDecimal(25000);
-    private static final int D_DAY_DISCOUNT_START_VALUE = 1000;
-    private static final int D_DAY_DISCOUNT_VALUE = 100;
-    private static final int STANDARD_DISCOUNT_VALUE = 2023;
-    private static final int SPECIAL_DAY_DISCOUNT_VALUE = 1000;
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
-
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###");
 
     private String discountDetails = "";
@@ -38,10 +32,10 @@ public class ChristmasEventController implements EventController {
     }
 
     private void presentEvent(Bill bill) {
-        if (bill.getTotalPrice().compareTo(PRESENT_STANDARD_AMOUNT) == 1) {
+        if (bill.getTotalPrice().compareTo(EventSettings.PRESENT_STANDARD_AMOUNT.getAmount()) == 1) {
             canPresent = true;
-            addContentsPresentEvent(PRESENT_VALUE);
-            totalBenefitAmount = totalBenefitAmount.add(PRESENT_VALUE);
+            addContentsPresentEvent(EventSettings.PRESENT_VALUE.getAmount());
+            totalBenefitAmount = totalBenefitAmount.add(EventSettings.PRESENT_VALUE.getAmount());
         }
     }
 
@@ -53,8 +47,9 @@ public class ChristmasEventController implements EventController {
 
     private void dDayDiscountEvent(ReservationDay reservationDay, Bill bill) {
         if (reservationDay.dDayDiscountEventPeriod()) {
-            BigDecimal discountValue = new BigDecimal(D_DAY_DISCOUNT_START_VALUE +
-                    ((reservationDay.getDay() - 1) * D_DAY_DISCOUNT_VALUE));
+            BigDecimal eventDay = new BigDecimal(reservationDay.getDay()-1);
+            BigDecimal discountValue = EventSettings.D_DAY_DISCOUNT_START_VALUE.getAmount().
+                    add((EventSettings.D_DAY_DISCOUNT_VALUE.getAmount().multiply(eventDay)));
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
@@ -75,7 +70,8 @@ public class ChristmasEventController implements EventController {
                     .mapToLong(orderedMenu -> orderedMenu.getCount())
                     .sum();
 
-            BigDecimal discountValue = new BigDecimal(count * STANDARD_DISCOUNT_VALUE);
+            BigDecimal discountValue = new BigDecimal(count)
+                    .multiply(EventSettings.STANDARD_DISCOUNT_VALUE.getAmount());
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
@@ -97,7 +93,9 @@ public class ChristmasEventController implements EventController {
                     .filter(orderedMenu -> WEEKEND_DISCOUNT_TYPE.equals(orderedMenu.getMenu().getMenuItem().getMenuType()))
                     .mapToLong(orderedMenu -> orderedMenu.getCount())
                     .sum();
-            BigDecimal discountValue = new BigDecimal(mainDishCount * STANDARD_DISCOUNT_VALUE);
+
+            BigDecimal discountValue = new BigDecimal(mainDishCount)
+                    .multiply(EventSettings.STANDARD_DISCOUNT_VALUE.getAmount());
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
@@ -115,7 +113,7 @@ public class ChristmasEventController implements EventController {
 
     private void specialDayDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isSpecialDay(day.getDay())) {
-            BigDecimal discountValue = new BigDecimal(SPECIAL_DAY_DISCOUNT_VALUE);
+            BigDecimal discountValue = EventSettings.SPECIAL_DAY_DISCOUNT_VALUE.getAmount();
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
