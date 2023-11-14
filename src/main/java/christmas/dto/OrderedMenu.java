@@ -7,14 +7,13 @@ public class OrderedMenu {
     private Menu menu;
     private int count;
 
-    public OrderedMenu(String menu, String count) {
+    public OrderedMenu(String menu, int count) {
         try {
-            int countValue = Parser.stringToIntPaser(count);
-            validateCount(countValue);
+            validateCount(count);
             Menu menuValue = Menu.findMenu(menu);
 
             this.menu = menuValue;
-            this.count = countValue;
+            this.count = count;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.dto.OrderedMenu;
 import christmas.enums.ErrorMessage;
 import christmas.parser.Parser;
@@ -14,15 +15,21 @@ public class Order {
     public void takeOrder(String input) {
         List<String> eachOrder = Parser.inputToEachOrder(input);
 
-        for (String orderInfo : eachOrder) {
-            String[] menuInfo = Parser.inputToMenu(orderInfo);
+        try {
+            for (String orderInformation : eachOrder) {
+                String[] menuInformation = Parser.inputToMenu(orderInformation);
 
+                validDuplicateMenu(orderDetails, menuInformation[0]);
+                validOrderFormat(menuInformation);
+                int count = Parser.stringToIntPaser(menuInformation[1]);
 
-            validDuplicateMenu(orderDetails, menuInfo[0]);
-            orderDetails.add(new OrderedMenu(menuInfo[0], menuInfo[1]));
+                orderDetails.add(new OrderedMenu(menuInformation[0], count));
+            }
+            validOnlyBeverage();
+        } catch (Exception e) {
+            System.out.println(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
+            takeOrder(Console.readLine());
         }
-
-        validOnlyBeverage();
     }
 
     private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName) {
@@ -32,13 +39,17 @@ public class Order {
         }
     }
 
+    private void validOrderFormat(String[] menuInfo) {
+        if (menuInfo.length != 2) throw new IllegalArgumentException();
+    }
+
     private void validOnlyBeverage() {
         for (OrderedMenu order : orderDetails) {
             if (!order.getMenu().getMenuItem()
                     .getMenuType().equals(NON_PERMIT_SINGLE_MENU_TYPE)) return;
         }
 
-        throw new IllegalArgumentException(ErrorMessage.ORDER_ONLY_BEVERAGE_ERROR_MESSAGE.getMessage());
+        throw new IllegalArgumentException();
     }
 
     public String toString() {

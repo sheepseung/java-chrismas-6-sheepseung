@@ -20,11 +20,10 @@ public class PlannerController {
     }
 
     public void run() {
+        OutputView.printStartMessage();
+        inputDay();
+        inputOrder();
         try {
-            OutputView.printStartMessage();
-            inputDay();
-            inputOrder();
-
             OutputView.printEventPreviewMessage(reservationDay.getDay());
             OutputView.printOrderDetails(order);
 
