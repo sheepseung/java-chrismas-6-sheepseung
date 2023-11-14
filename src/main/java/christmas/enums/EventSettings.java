@@ -13,7 +13,7 @@ public enum EventSettings {
 
     private final BigDecimal eventAmount;
 
-    EventSettings(BigDecimal eventAmount){
+    EventSettings(BigDecimal eventAmount) {
         this.eventAmount = eventAmount;
     }
 

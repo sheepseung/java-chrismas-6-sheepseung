@@ -22,7 +22,7 @@ public enum Badge {
         if (totalBenefit.compareTo(TREE_BADGE.standardAmount) == 1) {
             return TREE_BADGE.badge;
         }
-        if(totalBenefit.compareTo(STAR_BADGE.standardAmount) == 1){
+        if (totalBenefit.compareTo(STAR_BADGE.standardAmount) == 1) {
             return STAR_BADGE.badge;
         }
         return null;

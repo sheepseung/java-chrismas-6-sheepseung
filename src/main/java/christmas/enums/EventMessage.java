@@ -20,11 +20,11 @@ public enum EventMessage {
 
     private final String message;
 
-    EventMessage(String message){
+    EventMessage(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 }

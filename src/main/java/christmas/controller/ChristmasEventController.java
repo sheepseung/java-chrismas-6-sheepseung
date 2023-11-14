@@ -47,7 +47,7 @@ public class ChristmasEventController implements EventController {
 
     private void dDayDiscountEvent(ReservationDay reservationDay, Bill bill) {
         if (reservationDay.dDayDiscountEventPeriod()) {
-            BigDecimal eventDay = new BigDecimal(reservationDay.getDay()-1);
+            BigDecimal eventDay = new BigDecimal(reservationDay.getDay() - 1);
             BigDecimal discountValue = EventSettings.D_DAY_DISCOUNT_START_VALUE.getAmount().
                     add((EventSettings.D_DAY_DISCOUNT_VALUE.getAmount().multiply(eventDay)));
 

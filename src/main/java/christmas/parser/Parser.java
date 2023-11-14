@@ -35,7 +35,7 @@ public class Parser {
         return menuInfo;
     }
 
-    public static String BigDecimalToFormmatedString(BigDecimal price){
+    public static String BigDecimalToFormmatedString(BigDecimal price) {
         return DECIMAL_FORMAT.format(price);
     }
 }

@@ -7,8 +7,6 @@ import christmas.view.EventView;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.math.BigDecimal;
-
 public class PlannerController {
     private ReservationDay reservationDay;
     private Bill bill;

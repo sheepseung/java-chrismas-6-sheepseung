@@ -19,8 +19,8 @@ public class ReservationDay {
         return day;
     }
 
-    public boolean dDayDiscountEventPeriod(){
-        if(day <= 25) return true;
+    public boolean dDayDiscountEventPeriod() {
+        if (day <= 25) return true;
         return false;
     }
 }
