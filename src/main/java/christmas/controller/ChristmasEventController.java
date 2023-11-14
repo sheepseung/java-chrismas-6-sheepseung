@@ -6,12 +6,12 @@ import christmas.domain.Order;
 import christmas.dto.ReservationDay;
 import christmas.enums.Badge;
 import christmas.enums.OutputMessage;
-import christmas.view.OutputView;
+import christmas.view.EventView;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-public class ChrismasEventController implements EventController {
+public class ChristmasEventController implements EventController {
     private static final BigDecimal PRESENT_STANDARD_AMOUNT = new BigDecimal(120000);
     private static final BigDecimal PRESENT_VALUE = new BigDecimal(25000);
     private static final int D_DAY_DISCOUNT_START_VALUE = 1000;
@@ -132,9 +132,9 @@ public class ChrismasEventController implements EventController {
     }
 
     public void showEventDiscountDetails() {
-        OutputView.printPresentDetails(canPresent);
-        OutputView.printEventDiscountDetails(discountDetails);
-        OutputView.printTotalBenefitAmount(totalBenefitAmount);
-        OutputView.printBadge(Badge.getBadge(totalBenefitAmount));
+        EventView.printPresentDetails(canPresent);
+        EventView.printEventDiscountDetails(discountDetails);
+        EventView.printTotalBenefitAmount(totalBenefitAmount);
+        EventView.printBadge(Badge.getBadge(totalBenefitAmount));
     }
 }
