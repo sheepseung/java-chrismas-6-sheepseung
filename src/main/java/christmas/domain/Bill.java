@@ -16,8 +16,11 @@ public class Bill {
         this.order = order;
         calculateTotalPrice();
         calculateMenuQuantity();
-
-        validMaximumQuantity();
+        try {
+            validMaximumQuantity();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void calculateTotalPrice() {

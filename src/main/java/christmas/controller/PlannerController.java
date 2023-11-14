@@ -20,25 +20,29 @@ public class PlannerController {
     }
 
     public void run() {
-        OutputView.printStartMessage();
-        inputDay();
-        inputOrder();
+        try {
+            OutputView.printStartMessage();
+            inputDay();
+            inputOrder();
 
-        OutputView.printEventPreviewMessage(reservationDay.getDay());
-        OutputView.printOrderDetails(order);
+            OutputView.printEventPreviewMessage(reservationDay.getDay());
+            OutputView.printOrderDetails(order);
 
-        bill = new Bill(order);
-        EventView.printPriceBeforeDiscount(bill);
+            bill = new Bill(order);
+            EventView.printPriceBeforeDiscount(bill);
 
-        eventController.applyEvent(reservationDay, order, bill);
-        eventController.showEventDiscountDetails();
+            eventController.applyEvent(reservationDay, order, bill);
+            eventController.showEventDiscountDetails();
 
-        EventView.printPriceAfterDiscount(bill);
+            EventView.printPriceAfterDiscount(bill);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void inputDay() {
-        int date = InputView.inputDate();
-        reservationDay = new ReservationDay(date);
+        String dayInput = InputView.inputDate();
+        reservationDay = new ReservationDay(dayInput);
     }
 
     private void inputOrder() {

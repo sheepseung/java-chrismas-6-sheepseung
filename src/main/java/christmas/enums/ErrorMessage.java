@@ -3,7 +3,7 @@ package christmas.enums;
 public enum ErrorMessage {
     INPUT_NOT_INTEGER_ERROR_MESSAGE("[ERROR] : 정수 값을 입력해 주세요."),
     INPUT_NULL_ERROR_MESSAGE("[ERROR] : 정확한 값을 입력해 주세요."),
-    INPUT_OVER_RANGE_ERROR_MESSAGE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),
+    INPUT_DAY_ERROR_MESSAGE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),
 
     ORDER_NON_EXISTENT_MENU_ERROR_MESSAGE("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),
     ORDER_UNDER_ZERO_NUMBER_ERROR_MESSAGE("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),

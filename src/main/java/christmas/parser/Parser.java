@@ -22,6 +22,16 @@ public class Parser {
         }
     }
 
+    public static int stringToDay(String input) {
+        if (input.isBlank()) throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+        }
+    }
+
     public static List<String> inputToEachOrder(String input) {
         return Arrays.stream(input.split(INPUT_TO_EACH_ORDER_REGEX)).toList();
     }

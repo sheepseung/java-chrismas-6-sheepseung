@@ -1,18 +1,19 @@
 package christmas.dto;
 
 import christmas.enums.ErrorMessage;
+import christmas.parser.Parser;
 
 public class ReservationDay {
     private final int day;
 
-    public ReservationDay(int day) {
-        this.day = day;
-        validateDay();
+    public ReservationDay(String dayInput) {
+        this.day = Parser.stringToDay(dayInput);
+        validateDay(day);
     }
 
-    private void validateDay() {
+    private void validateDay(int day) {
         if (day > 31 || day < 1)
-            throw new IllegalArgumentException(ErrorMessage.INPUT_OVER_RANGE_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
     }
 
     public int getDay() {
