@@ -8,14 +8,15 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class PlannerController {
-    private ReservationDay reservationDay;
-    private Bill bill;
-
     private final Order order;
+    private final ReservationDay reservationDay;
     private final EventController eventController;
+
+    private Bill bill;
 
     public PlannerController(EventController eventController) {
         this.eventController = eventController;
+        reservationDay = new ReservationDay();
         this.order = new Order();
     }
 
@@ -41,7 +42,7 @@ public class PlannerController {
 
     private void inputDay() {
         String dayInput = InputView.inputDate();
-        reservationDay = new ReservationDay(dayInput);
+        reservationDay.reserveDay(dayInput);
     }
 
     private void inputOrder() {

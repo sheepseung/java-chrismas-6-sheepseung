@@ -39,7 +39,7 @@ public class Bill {
 
     private void validMaximumQuantity() {
         if (quantity > MAXIMUM_QUANTITY)
-            throw new IllegalArgumentException(ErrorMessage.MAXIMUM_ORDER_QUANTITY_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
     }
 
     public void discountPrice(BigDecimal discountValue) {

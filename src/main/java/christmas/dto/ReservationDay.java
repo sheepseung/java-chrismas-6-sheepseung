@@ -1,18 +1,20 @@
 package christmas.dto;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;
 import christmas.parser.Parser;
 
 public class ReservationDay {
-    private final int day;
+    private int day;
 
-    public ReservationDay(String dayInput) {
+    public void reserveDay(String dayInput) {
         try {
             this.day = Parser.stringToIntPaser(dayInput);
             validateDay(day);
         }
         catch (Exception e){
-            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+            System.out.println(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+            reserveDay(Console.readLine());
         }
     }
 
