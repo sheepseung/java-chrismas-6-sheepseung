@@ -7,13 +7,18 @@ public class ReservationDay {
     private final int day;
 
     public ReservationDay(String dayInput) {
-        this.day = Parser.stringToDay(dayInput);
-        validateDay(day);
+        try {
+            this.day = Parser.stringToIntPaser(dayInput);
+            validateDay(day);
+        }
+        catch (Exception e){
+            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+        }
     }
 
     private void validateDay(int day) {
         if (day > 31 || day < 1)
-            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException();
     }
 
     public int getDay() {

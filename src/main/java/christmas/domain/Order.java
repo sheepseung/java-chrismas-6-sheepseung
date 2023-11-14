@@ -17,6 +17,7 @@ public class Order {
         for (String orderInfo : eachOrder) {
             String[] menuInfo = Parser.inputToMenu(orderInfo);
 
+
             validDuplicateMenu(orderDetails, menuInfo[0]);
             orderDetails.add(new OrderedMenu(menuInfo[0], menuInfo[1]));
         }
@@ -27,7 +28,7 @@ public class Order {
     private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName) {
         for (OrderedMenu order : orderDetails) {
             if (order.getMenu().getMenuItem().getName().equals(menuName))
-                throw new IllegalArgumentException(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage());
+                throw new IllegalArgumentException();
         }
     }
 

@@ -1,6 +1,5 @@
 package christmas.dto;
 
-import christmas.enums.ErrorMessage;
 import christmas.enums.Menu;
 import christmas.parser.Parser;
 
@@ -9,18 +8,21 @@ public class OrderedMenu {
     private int count;
 
     public OrderedMenu(String menu, String count) {
-        int countValue = Parser.stringToIntPaser(count);
-        Menu menuValue = Menu.findMenu(menu);
+        try {
+            int countValue = Parser.stringToIntPaser(count);
+            validateCount(countValue);
+            Menu menuValue = Menu.findMenu(menu);
 
-        validateCount(countValue);
-
-        this.menu = menuValue;
-        this.count = countValue;
+            this.menu = menuValue;
+            this.count = countValue;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void validateCount(int count) {
         if (count < 0)
-            throw new IllegalArgumentException(ErrorMessage.ORDER_UNDER_ZERO_NUMBER_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException();
     }
 
     public Menu getMenu() {

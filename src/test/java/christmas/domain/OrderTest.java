@@ -29,7 +29,7 @@ public class OrderTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
                 -> testOrder.takeOrder("양송이수프-1,바비큐립-2,양송이수프-3"));
 
-        assertEquals(ErrorMessage.ORDER_DUPLICATE_MENU_ERROR_MESSAGE.getMessage(), exception.getMessage());
+        assertEquals(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
     @Test
