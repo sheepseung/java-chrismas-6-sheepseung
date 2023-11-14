@@ -5,8 +5,8 @@ import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
 import christmas.dto.ReservationDay;
 import christmas.enums.Badge;
+import christmas.enums.EventMessage;
 import christmas.enums.EventSettings;
-import christmas.enums.OutputMessage;
 import christmas.view.EventView;
 
 import java.math.BigDecimal;
@@ -40,7 +40,7 @@ public class ChristmasEventController implements EventController {
     }
 
     private void addContentsPresentEvent(BigDecimal discountValue) {
-        String discountDetail = (OutputMessage.PRESENT_DISCOUNT_MESSAGE.getMessage()
+        String discountDetail = (EventMessage.PRESENT_DISCOUNT_MESSAGE.getMessage()
                 + DECIMAL_FORMAT.format(discountValue) + "원\n");
         discountDetails += discountDetail;
     }
@@ -58,7 +58,7 @@ public class ChristmasEventController implements EventController {
     }
 
     private void addContentsDDayDiscountEvent(BigDecimal discountValue) {
-        String discountDetail = (OutputMessage.D_DAY_DISCOUNT_MESSAGE.getMessage()
+        String discountDetail = (EventMessage.D_DAY_DISCOUNT_MESSAGE.getMessage()
                 + DECIMAL_FORMAT.format(discountValue) + "원\n");
         discountDetails += discountDetail;
     }
@@ -81,7 +81,7 @@ public class ChristmasEventController implements EventController {
 
     private void addContentsWeekdayDiscountEvent(BigDecimal discountValue) {
         if (discountValue.compareTo(new BigDecimal(0)) != 0) {
-            String discountDetail = (OutputMessage.WEEKDAY_DISCOUNT_MESSAGE.getMessage()
+            String discountDetail = (EventMessage.WEEKDAY_DISCOUNT_MESSAGE.getMessage()
                     + DECIMAL_FORMAT.format(discountValue) + "원\n");
             discountDetails += discountDetail;
         }
@@ -105,7 +105,7 @@ public class ChristmasEventController implements EventController {
 
     private void addContentsWeekendDiscountEvent(BigDecimal discountValue) {
         if (discountValue.compareTo(new BigDecimal(0)) != 0) {
-            String discountDetail = (OutputMessage.WEEKEND_DISCOUNT_MESSAGE.getMessage()
+            String discountDetail = (EventMessage.WEEKEND_DISCOUNT_MESSAGE.getMessage()
                     + DECIMAL_FORMAT.format(discountValue) + "원\n");
             discountDetails += discountDetail;
         }
@@ -123,7 +123,7 @@ public class ChristmasEventController implements EventController {
 
     private void addContentsSpecialDayDiscountEvent(BigDecimal discountValue) {
         if (discountValue.compareTo(new BigDecimal(0)) == 1) {
-            String discountDetail = (OutputMessage.SPECIAL_DAY_DISCOUNT_MESSAGE.getMessage()
+            String discountDetail = (EventMessage.SPECIAL_DAY_DISCOUNT_MESSAGE.getMessage()
                     + DECIMAL_FORMAT.format(discountValue) + "원\n");
             discountDetails += discountDetail;
         }

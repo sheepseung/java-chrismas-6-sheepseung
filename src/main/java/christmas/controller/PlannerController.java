@@ -11,13 +11,14 @@ import java.math.BigDecimal;
 
 public class PlannerController {
     private ReservationDay reservationDay;
-    private Order order = new Order();
     private Bill bill;
+
+    private final Order order;
     private final EventController eventController;
 
-    private final BigDecimal EVENT_APPLY_STANDARD_PRICE = new BigDecimal(10000);
     public PlannerController(EventController eventController) {
         this.eventController = eventController;
+        this.order = new Order();
     }
 
     public void run() {
@@ -31,10 +32,8 @@ public class PlannerController {
         bill = new Bill(order);
         EventView.printPriceBeforeDiscount(bill);
 
-        if(bill.getTotalPrice().compareTo(EVENT_APPLY_STANDARD_PRICE) >= 0) {
-            eventController.applyEvent(reservationDay, order, bill);
-            eventController.showEventDiscountDetails();
-        }
+        eventController.applyEvent(reservationDay, order, bill);
+        eventController.showEventDiscountDetails();
 
         EventView.printPriceAfterDiscount(bill);
     }
