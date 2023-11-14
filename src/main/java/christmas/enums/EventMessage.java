@@ -15,7 +15,6 @@ public enum EventMessage {
     BADGE_EVENT_MESSAGE("<12월 이벤트 배지>\n"),
     NO_APPLIED_VALUE("없음\n"),
 
-
     PRESENT_ITEM("샴페인 1개");
 
     private final String message;
