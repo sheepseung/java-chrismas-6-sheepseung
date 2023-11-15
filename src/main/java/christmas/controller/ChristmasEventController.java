@@ -16,13 +16,12 @@ import java.util.Map;
 public class ChristmasEventController implements EventController {
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
+    private static final DecemberCalendar decemberCalendar = new DecemberCalendar();
 
-    private String eventDetails = "";
     private boolean canPresent = false;
     private BigDecimal totalBenefitAmount = new BigDecimal(0);
-
     private Map<Menu, Integer> orderDetails;
-    private static final DecemberCalendar decemberCalendar = new DecemberCalendar();
+    private String eventDetails = "";
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
         this.orderDetails = order.getOrderDetails();
@@ -97,10 +96,12 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    public void showEventDiscountDetails() {
+    public void showEventDiscountDetails(Bill bill) {
+        EventView.printPriceBeforeDiscount(bill);
         EventView.printPresentDetails(canPresent);
         EventView.printEventDiscountDetails(eventDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
         EventView.printBadge(Badge.getBadge(totalBenefitAmount));
+        EventView.printPriceAfterDiscount(bill);
     }
 }

@@ -3,7 +3,6 @@ package christmas.controller;
 import christmas.domain.Bill;
 import christmas.domain.Order;
 import christmas.domain.ReservationDay;
-import christmas.view.EventView;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -29,12 +28,9 @@ public class PlannerController {
             OutputView.printOrderDetails(order);
 
             bill = new Bill(order);
-            EventView.printPriceBeforeDiscount(bill);
 
             eventController.applyEvent(reservationDay, order, bill);
-            eventController.showEventDiscountDetails();
-
-            EventView.printPriceAfterDiscount(bill);
+            eventController.showEventDiscountDetails(bill);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

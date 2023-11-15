@@ -8,5 +8,5 @@ public interface EventController {
 
     void applyEvent(ReservationDay day, Order order, Bill bill);
 
-    void showEventDiscountDetails();
+    void showEventDiscountDetails(Bill bill);
 }
