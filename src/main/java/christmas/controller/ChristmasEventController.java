@@ -33,7 +33,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void presentEvent(Bill bill) {
+    public void presentEvent(Bill bill) {
         if (bill.getTotalPrice().compareTo(EventSettings.PRESENT_STANDARD_AMOUNT.getAmount()) == 1) {
             canPresent = true;
             BigDecimal benefitValue = EventSettings.PRESENT_VALUE.getAmount();
@@ -43,7 +43,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void dDayDiscountEvent(ReservationDay reservationDay, Bill bill) {
+    public void dDayDiscountEvent(ReservationDay reservationDay, Bill bill) {
         if (reservationDay.dDayDiscountEventPeriod()) {
             BigDecimal eventDay = new BigDecimal(reservationDay.getDay() - 1);
             BigDecimal discountValue = EventSettings.D_DAY_DISCOUNT_START_VALUE.getAmount().
@@ -55,7 +55,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void weekdayDiscountEvent(ReservationDay day, Bill bill) {
+    public void weekdayDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isWeekday(day.getDay())) {
             long dessertCount = orderDetails.entrySet().stream()
                     .filter(entry -> WEEKDAY_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
@@ -70,7 +70,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void weekendDiscountEvent(ReservationDay day, Bill bill) {
+    public void weekendDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isWeekend(day.getDay())) {
             long mainDishCount = orderDetails.entrySet().stream()
                     .filter(entry -> WEEKEND_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
@@ -85,7 +85,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void specialDayDiscountEvent(ReservationDay day, Bill bill) {
+    public void specialDayDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isSpecialDay(day.getDay())) {
             BigDecimal discountValue = EventSettings.SPECIAL_DAY_DISCOUNT_VALUE.getAmount();
 
@@ -95,7 +95,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void badgeEvent(BigDecimal totalBenefitAmount) {
+    public void badgeEvent(BigDecimal totalBenefitAmount) {
         badge = Badge.getBadge(totalBenefitAmount);
     }
 
