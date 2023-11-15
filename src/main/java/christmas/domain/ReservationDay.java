@@ -1,7 +1,6 @@
 package christmas.domain;
 
-import camp.nextstep.edu.missionutils.Console;
-import christmas.enums.ErrorMessage;
+import christmas.utils.ErrorMessage;
 import christmas.parser.Parser;
 
 public class ReservationDay {

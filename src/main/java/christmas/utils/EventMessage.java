@@ -1,4 +1,4 @@
-package christmas.enums;
+package christmas.utils;
 
 public enum EventMessage {
     BEFORE_DISCOUNT_PRICE_OUTPUT_MESSAGE("<할인 전 총주문 금액>\n%s원\n"),

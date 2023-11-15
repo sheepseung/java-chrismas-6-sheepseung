@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.*;
-import christmas.enums.EventSettings;
+import christmas.utils.EventSettings;
 import christmas.parser.EventDetailsParser;
 import christmas.view.EventView;
 
@@ -11,7 +11,6 @@ import java.util.Map;
 public class ChristmasEventController implements EventController {
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
-    private static final BigDecimal EVENT_APPLY_STAND = new BigDecimal(10000);
     private static final DecemberCalendar decemberCalendar = new DecemberCalendar();
 
     private boolean canPresent = false;
@@ -23,7 +22,7 @@ public class ChristmasEventController implements EventController {
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
         beforeEventApplied = bill.getTotalPrice();
-        if(bill.getTotalPrice().compareTo(EVENT_APPLY_STAND) >= 0) {
+        if(bill.getTotalPrice().compareTo(EventSettings.EVENT_APPLY_STAND.getAmount()) >= 0) {
             this.orderDetails = order.getOrderDetails();
             presentEvent(bill);
             dDayDiscountEvent(reservationDay, bill);

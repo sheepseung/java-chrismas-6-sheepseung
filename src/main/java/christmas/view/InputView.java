@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.enums.InputMessage;
+import christmas.utils.InputMessage;
 
 public class InputView {
 

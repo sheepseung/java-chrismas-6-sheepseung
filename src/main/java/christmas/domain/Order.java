@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.enums.ErrorMessage;
+import christmas.utils.ErrorMessage;
 import christmas.parser.Parser;
 
 import java.util.HashMap;

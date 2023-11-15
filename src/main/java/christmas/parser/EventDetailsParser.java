@@ -1,6 +1,6 @@
 package christmas.parser;
 
-import christmas.enums.EventMessage;
+import christmas.utils.EventMessage;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Order;
-import christmas.enums.OutputMessage;
+import christmas.utils.OutputMessage;
 
 public class OutputView {
 

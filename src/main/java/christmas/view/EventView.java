@@ -2,7 +2,7 @@ package christmas.view;
 
 import christmas.domain.Badge;
 import christmas.domain.Bill;
-import christmas.enums.EventMessage;
+import christmas.utils.EventMessage;
 import christmas.parser.Parser;
 
 import java.math.BigDecimal;

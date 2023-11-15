@@ -21,7 +21,6 @@ public enum Menu {
     BEVERAGE_RED_WINE(new MenuItem("레드와인", "beverage"), new BigDecimal("60000")),
     BEVERAGE_CHAMPAGNE(new MenuItem("샴페인", "beverage"), new BigDecimal("25000"));
 
-
     private final MenuItem menuItem;
     private final BigDecimal price;
 
