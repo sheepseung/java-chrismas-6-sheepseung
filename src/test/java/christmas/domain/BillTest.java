@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ public class BillTest {
     Order testOrder = new Order();
 
     @Test
+    @DisplayName("전체_가격_계산_테스트")
     public void testBillTotalPriceCalculation() {
         testOrder.takeOrder("양송이수프-1,티본스테이크-2,초코케이크-3");
         Bill bill = new Bill(testOrder);
@@ -23,7 +25,8 @@ public class BillTest {
     }
 
     @Test
-    public void testBillMaximumQuantityValidation() {
+    @DisplayName("가격_할인_적용_테스트")
+    public void testBillDiscountPrice() {
         testOrder.takeOrder("양송이수프-5"); //30,000원
         Bill bill = new Bill(testOrder);
         bill.discountPrice(new BigDecimal(10000));  //30,000 - 10,000 원
