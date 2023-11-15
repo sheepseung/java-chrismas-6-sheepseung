@@ -7,10 +7,12 @@ import christmas.domain.ReservationDay;
 import christmas.enums.Badge;
 import christmas.enums.EventMessage;
 import christmas.enums.EventSettings;
+import christmas.enums.Menu;
 import christmas.view.EventView;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.Map;
 
 public class ChristmasEventController implements EventController {
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
@@ -21,13 +23,15 @@ public class ChristmasEventController implements EventController {
     private boolean canPresent = false;
     private BigDecimal totalBenefitAmount = new BigDecimal(0);
 
-    public static final DecemberCalendar decemberCalendar = new DecemberCalendar();
+    private Map<Menu, Integer> orderDetails;
+    private static final DecemberCalendar decemberCalendar = new DecemberCalendar();
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
+        this.orderDetails = order.getOrderDetails();
         presentEvent(bill);
         dDayDiscountEvent(reservationDay, bill);
-        weekdayDiscountEvent(reservationDay, order, bill);
-        weekendDiscountEvent(reservationDay, order, bill);
+        weekdayDiscountEvent(reservationDay, bill);
+        weekendDiscountEvent(reservationDay, bill);
         specialDayDiscountEvent(reservationDay, bill);
     }
 
@@ -63,11 +67,11 @@ public class ChristmasEventController implements EventController {
         discountDetails += discountDetail;
     }
 
-    private void weekdayDiscountEvent(ReservationDay day, Order order, Bill bill) {
+    private void weekdayDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isWeekday(day.getDay())) {
-            long count = order.getOrderDetails().stream()
-                    .filter(orderedMenu -> WEEKDAY_DISCOUNT_TYPE.equals(orderedMenu.getMenu().getMenuItem().getMenuType()))
-                    .mapToLong(orderedMenu -> orderedMenu.getCount())
+            long count = orderDetails.entrySet().stream()
+                    .filter(entry -> WEEKDAY_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
+                    .mapToLong(Map.Entry::getValue)
                     .sum();
 
             BigDecimal discountValue = new BigDecimal(count)
@@ -87,11 +91,11 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void weekendDiscountEvent(ReservationDay day, Order order, Bill bill) {
+    private void weekendDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isWeekend(day.getDay())) {
-            long mainDishCount = order.getOrderDetails().stream()
-                    .filter(orderedMenu -> WEEKEND_DISCOUNT_TYPE.equals(orderedMenu.getMenu().getMenuItem().getMenuType()))
-                    .mapToLong(orderedMenu -> orderedMenu.getCount())
+            long mainDishCount = orderDetails.entrySet().stream()
+                    .filter(entry -> WEEKEND_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
+                    .mapToLong(Map.Entry::getValue)
                     .sum();
 
             BigDecimal discountValue = new BigDecimal(mainDishCount)
