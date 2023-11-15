@@ -21,13 +21,13 @@ public enum Badge {
     }
 
     public static Badge getBadge(BigDecimal totalBenefit) {
-        if (totalBenefit.compareTo(SANTA_BADGE.standardAmount) == 1) {
+        if (totalBenefit.compareTo(SANTA_BADGE.standardAmount) >= 0) {
             return SANTA_BADGE;
         }
-        if (totalBenefit.compareTo(TREE_BADGE.standardAmount) == 1) {
+        if (totalBenefit.compareTo(TREE_BADGE.standardAmount) >= 0) {
             return TREE_BADGE;
         }
-        if (totalBenefit.compareTo(STAR_BADGE.standardAmount) == 1) {
+        if (totalBenefit.compareTo(STAR_BADGE.standardAmount) >= 0) {
             return STAR_BADGE;
         }
         return null;
