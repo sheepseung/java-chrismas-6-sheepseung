@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Order {
-    private final Map<Menu, Integer> orderDetails = new HashMap<>();
     private static final String NON_PERMIT_SINGLE_MENU_TYPE = "beverage";
+    private static final int MAXIMUM_QUANTITY = 20;
+
+    private final Map<Menu, Integer> orderDetails = new HashMap<>();
+    private int quantity = 0;
 
     public void takeOrder(String input) {
         List<String> eachOrderedMenu = Parser.inputToEachOrderedMenu(input);
@@ -26,9 +29,22 @@ public class Order {
                 orderDetails.put(orderedMenu, menuNumber);
             }
             validOnlyBeverage();
+            calculateMenuQuantity();
+            validMaximumQuantity();
         } catch (Exception e) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
         }
+    }
+
+    private void calculateMenuQuantity() {
+        for (int count : orderDetails.values()) {
+            quantity += count;
+        }
+    }
+
+    private void validMaximumQuantity() {
+        if (quantity > MAXIMUM_QUANTITY)
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
     }
 
     private void validDuplicateMenu(Menu orderedMenu) {

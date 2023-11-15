@@ -1,23 +1,16 @@
 package christmas.domain;
 
-import christmas.enums.ErrorMessage;
-
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class Bill {
-    private static final int MAXIMUM_QUANTITY = 20;
     private final Map<Menu, Integer> orderDetails;
 
     private BigDecimal totalPrice = new BigDecimal(0);
-    private int quantity = 0;
 
     public Bill(Order order) {
         this.orderDetails = order.getOrderDetails();
         calculateTotalPrice();
-        calculateMenuQuantity();
-
-        validMaximumQuantity();
     }
 
     private void calculateTotalPrice() {
@@ -27,17 +20,6 @@ public class Bill {
             BigDecimal price = menu.getPrice().multiply(BigDecimal.valueOf(count));
             totalPrice = totalPrice.add(price);
         }
-    }
-
-    private void calculateMenuQuantity() {
-        for (int count : orderDetails.values()) {
-            quantity += count;
-        }
-    }
-
-    private void validMaximumQuantity() {
-        if (quantity > MAXIMUM_QUANTITY)
-            throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
     }
 
     public void discountPrice(BigDecimal discountValue) {
