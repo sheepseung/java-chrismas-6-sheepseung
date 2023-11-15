@@ -21,19 +21,16 @@ public class PlannerController {
 
     public void run() {
         OutputView.printStartMessage();
-        inputDay();
-        inputOrder();
+
         try {
-            OutputView.printEventPreviewMessage(reservationDay.getDay());
-            OutputView.printOrderDetails(order);
-
-            bill = new Bill(order);
-
-            eventController.applyEvent(reservationDay, order, bill);
-            eventController.showEventDiscountDetails(bill);
-        } catch (Exception e) {
+            inputDay();
+            inputOrder();
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return;
         }
+
+        processEvent();
     }
 
     private void inputDay() {
@@ -41,11 +38,10 @@ public class PlannerController {
             try {
                 String dayInput = InputView.inputDate();
                 reservationDay.reserveDay(dayInput);
-            } catch (Exception e) {
+                break;
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
-            break;
         }
     }
 
@@ -54,11 +50,20 @@ public class PlannerController {
             try {
                 String orderInput = InputView.inputOrder();
                 order.takeOrder(orderInput.replace(" ", ""));
-            } catch (Exception e) {
+                break;
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                continue;
             }
-            break;
         }
+    }
+
+    private void processEvent() {
+        OutputView.printEventPreviewMessage(reservationDay.getDay());
+        OutputView.printOrderDetails(order);
+
+        bill = new Bill(order);
+
+        eventController.applyEvent(reservationDay, order, bill);
+        eventController.showEventDiscountDetails(bill);
     }
 }

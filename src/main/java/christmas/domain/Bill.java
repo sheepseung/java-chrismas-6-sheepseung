@@ -16,11 +16,8 @@ public class Bill {
         this.orderDetails = order.getOrderDetails();
         calculateTotalPrice();
         calculateMenuQuantity();
-        try {
-            validMaximumQuantity();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+        validMaximumQuantity();
     }
 
     private void calculateTotalPrice() {
@@ -40,7 +37,7 @@ public class Bill {
 
     private void validMaximumQuantity() {
         if (quantity > MAXIMUM_QUANTITY)
-            throw new IllegalArgumentException(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
     }
 
     public void discountPrice(BigDecimal discountValue) {

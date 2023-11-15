@@ -27,7 +27,7 @@ public class Order {
             }
             validOnlyBeverage();
         } catch (Exception e) {
-            throw new IllegalArgumentException(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
         }
     }
 
