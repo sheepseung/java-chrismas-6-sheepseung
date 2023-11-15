@@ -24,17 +24,19 @@ class ReservationDayTest {
         ReservationDay reservationDay = new ReservationDay();
         String invalidDayInput = "abc";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> reservationDay.reserveDay(invalidDayInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> reservationDay.reserveDay(invalidDayInput));
         assertEquals(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
     @Test
     @DisplayName("날짜_범위밖_예외_테스트")
-    void reserveDay_OutRangeInput_ShouldThrowException(){
+    void reserveDay_OutRangeInput_ShouldThrowException() {
         ReservationDay reservationDay = new ReservationDay();
         String invalidDayInput = "35";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> reservationDay.reserveDay(invalidDayInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> reservationDay.reserveDay(invalidDayInput));
         assertEquals(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 

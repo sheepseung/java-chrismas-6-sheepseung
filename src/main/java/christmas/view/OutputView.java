@@ -16,5 +16,4 @@ public class OutputView {
     public static void printOrderDetails(Order orders) {
         System.out.println(OutputMessage.ORDER_DETAILS_OUTPUT_MESSAGE.getMessage() + orders.toString());
     }
-
 }

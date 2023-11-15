@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
     String validInput = "티본스테이크-2,양송이수프-2";
+
     @Test
     @DisplayName("주문_유효값_입력_테스트")
     void takeOrder_ValidInput_ShouldNotThrowException() {
@@ -24,7 +25,8 @@ class OrderTest {
         Order order = new Order();
         String duplicateMenuInput = "티본스테이크-2,티본스테이크-2";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> order.takeOrder(duplicateMenuInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> order.takeOrder(duplicateMenuInput));
         assertEquals(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
@@ -34,7 +36,8 @@ class OrderTest {
         Order order = new Order();
         String invalidFormatInput = "티본스테이크+2";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> order.takeOrder(invalidFormatInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> order.takeOrder(invalidFormatInput));
         assertEquals(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
@@ -44,7 +47,8 @@ class OrderTest {
         Order order = new Order();
         String exceedQuantityInput = "티본스테이크-20,양송이수프-10";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> order.takeOrder(exceedQuantityInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> order.takeOrder(exceedQuantityInput));
         assertEquals(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
@@ -54,7 +58,8 @@ class OrderTest {
         Order order = new Order();
         String onlyBeverageInput = "제로콜라-10";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> order.takeOrder(onlyBeverageInput));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> order.takeOrder(onlyBeverageInput));
         assertEquals(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
@@ -63,7 +68,8 @@ class OrderTest {
     void toString_OrderDetailsEmpty_ShouldReturnEmptyString() {
         Order order = new Order();
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> order.takeOrder(""));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> order.takeOrder(""));
         assertEquals(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
         assertEquals("", order.toString());
     }

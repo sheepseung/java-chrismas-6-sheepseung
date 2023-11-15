@@ -26,6 +26,7 @@ class DecemberCalendarTest {
         DecemberCalendar decemberCalendar = new DecemberCalendar();
         assertFalse(decemberCalendar.isSpecialDay(20));
     }
+
     @Test
     @DisplayName("별표_날짜_테스트")
     void isSpecialDay_SpecialDayDate_ShouldReturnTrue() {

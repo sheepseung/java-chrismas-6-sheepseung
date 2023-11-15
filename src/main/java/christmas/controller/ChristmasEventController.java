@@ -22,7 +22,7 @@ public class ChristmasEventController implements EventController {
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
         beforeEventApplied = bill.getTotalPrice();
-        if(bill.getTotalPrice().compareTo(EventSettings.EVENT_APPLY_STAND.getAmount()) >= 0) {
+        if (bill.getTotalPrice().compareTo(EventSettings.EVENT_APPLY_STAND.getAmount()) >= 0) {
             this.orderDetails = order.getOrderDetails();
             presentEvent(bill);
             dDayDiscountEvent(reservationDay, bill);
@@ -95,7 +95,7 @@ public class ChristmasEventController implements EventController {
         }
     }
 
-    private void badgeEvent(BigDecimal totalBenefitAmount){
+    private void badgeEvent(BigDecimal totalBenefitAmount) {
         badge = Badge.getBadge(totalBenefitAmount);
     }
 

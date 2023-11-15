@@ -32,7 +32,7 @@ public class Order {
         int menuNumber = Parser.stringToIntPaser(menuNameAndNumber[1]);
         Menu orderedMenu = Menu.findMenu(menuName);
 
-        validateDuplicateMenu(orderDetails ,orderedMenu);
+        validateDuplicateMenu(orderDetails, orderedMenu);
         validateOrderFormat(menuNameAndNumber);
         orderDetails.put(orderedMenu, menuNumber);
     }
