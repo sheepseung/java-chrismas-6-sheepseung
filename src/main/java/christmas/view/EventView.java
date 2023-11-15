@@ -22,10 +22,10 @@ public class EventView {
         System.out.println(EventMessage.NO_APPLIED_VALUE.getMessage());
     }
 
-    public static void printEventDiscountDetails(String discountDetails) {
-        System.out.println(EventMessage.EVENT_DISCOUNT_CONTENTS_MESSAGE.getMessage());
-        if (!discountDetails.isBlank()) {
-            System.out.println(discountDetails);
+    public static void printEventResultDetails(String eventResult) {
+        System.out.println(EventMessage.EVENT_DISCOUNT_CONTENTS_OUTPUT_MESSAGE.getMessage());
+        if (!eventResult.isBlank()) {
+            System.out.println(eventResult);
             return;
         }
         System.out.println(EventMessage.NO_APPLIED_VALUE.getMessage());
@@ -40,9 +40,10 @@ public class EventView {
         System.out.println(EventMessage.NO_APPLIED_VALUE.getMessage());
     }
 
-    public static void printPriceAfterDiscount(Bill bill) {
+    public static void printPriceAfterDiscount(Bill bill, BigDecimal totalBenefitAmount) {
         System.out.printf(EventMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(),
-                Parser.BigDecimalToFormmatedString(bill.getTotalPrice()));
+                Parser.BigDecimalToFormmatedString(bill.getTotalPrice()
+                        .subtract(totalBenefitAmount)));
     }
 
     public static void printBadge(String badge) {

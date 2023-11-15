@@ -2,7 +2,6 @@ package christmas.domain;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;
-import christmas.enums.Menu;
 import christmas.parser.Parser;
 
 import java.util.HashMap;

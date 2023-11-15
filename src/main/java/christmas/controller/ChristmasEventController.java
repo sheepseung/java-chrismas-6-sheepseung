@@ -4,9 +4,8 @@ import christmas.domain.Bill;
 import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
 import christmas.domain.ReservationDay;
-import christmas.enums.Badge;
 import christmas.enums.EventSettings;
-import christmas.enums.Menu;
+import christmas.domain.Menu;
 import christmas.parser.EventDetailsParser;
 import christmas.view.EventView;
 
@@ -21,7 +20,7 @@ public class ChristmasEventController implements EventController {
     private boolean canPresent = false;
     private BigDecimal totalBenefitAmount = new BigDecimal(0);
     private Map<Menu, Integer> orderDetails;
-    private String eventDetails = "";
+    private String eventResultDetails = "";
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
         this.orderDetails = order.getOrderDetails();
@@ -38,7 +37,7 @@ public class ChristmasEventController implements EventController {
             BigDecimal benefitValue = EventSettings.PRESENT_VALUE.getAmount();
 
             totalBenefitAmount = totalBenefitAmount.add(benefitValue);
-            eventDetails += EventDetailsParser.parsePresentEventDetail(benefitValue);
+            eventResultDetails += EventDetailsParser.parsePresentEventDetail(benefitValue);
         }
     }
 
@@ -50,7 +49,7 @@ public class ChristmasEventController implements EventController {
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            eventDetails += EventDetailsParser.parseDDayDiscountEventDetail(discountValue);
+            eventResultDetails += EventDetailsParser.parseDDayDiscountEventDetail(discountValue);
         }
     }
 
@@ -60,13 +59,12 @@ public class ChristmasEventController implements EventController {
                     .filter(entry -> WEEKDAY_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
                     .mapToLong(Map.Entry::getValue)
                     .sum();
-
             BigDecimal discountValue = new BigDecimal(dessertCount)
                     .multiply(EventSettings.STANDARD_DISCOUNT_VALUE.getAmount());
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            eventDetails += EventDetailsParser.parseWeekdayDiscountEventDetail(discountValue);
+            eventResultDetails += EventDetailsParser.parseWeekdayDiscountEventDetail(discountValue);
         }
     }
 
@@ -76,13 +74,12 @@ public class ChristmasEventController implements EventController {
                     .filter(entry -> WEEKEND_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
                     .mapToLong(Map.Entry::getValue)
                     .sum();
-
             BigDecimal discountValue = new BigDecimal(mainDishCount)
                     .multiply(EventSettings.STANDARD_DISCOUNT_VALUE.getAmount());
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            eventDetails += EventDetailsParser.parseWeekendDiscountEventDetail(discountValue);
+            eventResultDetails += EventDetailsParser.parseWeekendDiscountEventDetail(discountValue);
         }
     }
 
@@ -92,16 +89,15 @@ public class ChristmasEventController implements EventController {
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            eventDetails += EventDetailsParser.paresSpecialDayDiscountEventDetail(discountValue);
+            eventResultDetails += EventDetailsParser.paresSpecialDayDiscountEventDetail(discountValue);
         }
     }
 
     public void showEventDiscountDetails(Bill bill) {
         EventView.printPriceBeforeDiscount(bill);
         EventView.printPresentDetails(canPresent);
-        EventView.printEventDiscountDetails(eventDetails);
+        EventView.printEventResultDetails(eventResultDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
-        EventView.printBadge(Badge.getBadge(totalBenefitAmount));
-        EventView.printPriceAfterDiscount(bill);
+        EventView.printPriceAfterDiscount(bill, totalBenefitAmount);
     }
 }

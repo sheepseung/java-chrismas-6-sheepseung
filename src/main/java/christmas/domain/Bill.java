@@ -1,7 +1,6 @@
 package christmas.domain;
 
 import christmas.enums.ErrorMessage;
-import christmas.enums.Menu;
 
 import java.math.BigDecimal;
 import java.util.Map;

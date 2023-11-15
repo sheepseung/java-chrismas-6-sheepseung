@@ -1,4 +1,4 @@
-package christmas.enums;
+package christmas.domain;
 
 import java.math.BigDecimal;
 
