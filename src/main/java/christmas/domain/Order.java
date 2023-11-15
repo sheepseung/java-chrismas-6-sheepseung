@@ -17,23 +17,25 @@ public class Order {
     public void takeOrder(String input) {
         List<String> eachOrderedMenu = Parser.inputToEachOrderedMenu(input);
         try {
-            for (String menuInformation : eachOrderedMenu) {
-                String[] menuNameAndNumber = Parser.inputToMenu(menuInformation);
-
-                String menuName = menuNameAndNumber[0];
-                int menuNumber = Parser.stringToIntPaser(menuNameAndNumber[1]);
-                Menu orderedMenu = Menu.findMenu(menuName);
-
-                validDuplicateMenu(orderedMenu);
-                validOrderFormat(menuNameAndNumber);
-                orderDetails.put(orderedMenu, menuNumber);
-            }
-            validOnlyBeverage();
             calculateMenuQuantity();
+
+            eachOrderedMenu.forEach(menuInformation -> processOrderedMenu(menuInformation));
+            validOnlyBeverage();
             validMaximumQuantity();
         } catch (Exception e) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_ORDER_ERROR_MESSAGE.getMessage());
         }
+    }
+
+    private void processOrderedMenu(String menuInformation) {
+        String[] menuNameAndNumber = Parser.inputToMenu(menuInformation);
+        String menuName = menuNameAndNumber[0];
+        int menuNumber = Parser.stringToIntPaser(menuNameAndNumber[1]);
+        Menu orderedMenu = Menu.findMenu(menuName);
+
+        validDuplicateMenu(orderedMenu);
+        validOrderFormat(menuNameAndNumber);
+        orderDetails.put(orderedMenu, menuNumber);
     }
 
     private void calculateMenuQuantity() {
