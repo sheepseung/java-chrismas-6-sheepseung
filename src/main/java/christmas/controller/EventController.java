@@ -2,7 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Bill;
 import christmas.domain.Order;
-import christmas.dto.ReservationDay;
+import christmas.domain.ReservationDay;
 
 public interface EventController {
 

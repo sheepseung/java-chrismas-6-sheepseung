@@ -2,7 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Bill;
 import christmas.domain.Order;
-import christmas.dto.ReservationDay;
+import christmas.domain.ReservationDay;
 import christmas.view.EventView;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -16,7 +16,7 @@ public class PlannerController {
 
     public PlannerController(EventController eventController) {
         this.eventController = eventController;
-        reservationDay = new ReservationDay();
+        this.reservationDay = new ReservationDay();
         this.order = new Order();
     }
 

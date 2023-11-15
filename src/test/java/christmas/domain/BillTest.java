@@ -34,7 +34,7 @@ public class BillTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
                 -> new Bill(testOrder));
 
-        assertEquals(ErrorMessage.MINIMUM_ORDER_AMOUNT_ERROR_MESSAGE.getMessage(), exception.getMessage());
+        assertEquals(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -43,6 +43,6 @@ public class BillTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Bill(testOrder));
 
-        assertEquals(ErrorMessage.MAXIMUM_ORDER_QUANTITY_ERROR_MESSAGE.getMessage(), exception.getMessage());
+        assertEquals(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage(), exception.getMessage());
     }
 }

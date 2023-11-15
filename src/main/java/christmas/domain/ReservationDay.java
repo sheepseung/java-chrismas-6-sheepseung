@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.domain;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;

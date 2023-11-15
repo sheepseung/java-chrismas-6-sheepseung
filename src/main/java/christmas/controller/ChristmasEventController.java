@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.domain.Bill;
 import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
-import christmas.dto.ReservationDay;
+import christmas.domain.ReservationDay;
 import christmas.enums.Badge;
 import christmas.enums.EventMessage;
 import christmas.enums.EventSettings;
