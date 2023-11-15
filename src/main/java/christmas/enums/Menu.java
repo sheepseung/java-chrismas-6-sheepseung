@@ -1,6 +1,6 @@
 package christmas.enums;
 
-import christmas.dto.MenuItem;
+import christmas.dao.MenuItem;
 
 import java.math.BigDecimal;
 

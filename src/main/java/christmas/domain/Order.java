@@ -1,15 +1,16 @@
 package christmas.domain;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.dto.OrderedMenu;
 import christmas.enums.ErrorMessage;
+import christmas.enums.Menu;
 import christmas.parser.Parser;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
-    private final List<OrderedMenu> orderDetails = new ArrayList<>();
+    private final Map<Menu, Integer> orderDetails = new HashMap<>();
     private static final String NON_PERMIT_SINGLE_MENU_TYPE = "beverage";
 
     public void takeOrder(String input) {
@@ -19,11 +20,13 @@ public class Order {
             for (String menuInformation : eachOrderedMenu) {
                 String[] menuNameAndNumber = Parser.inputToMenu(menuInformation);
 
-                validDuplicateMenu(orderDetails, menuNameAndNumber[0]);
-                validOrderFormat(menuNameAndNumber);
-                int count = Parser.stringToIntPaser(menuNameAndNumber[1]);
+                String menuName = menuNameAndNumber[0];
+                int menuNumber = Parser.stringToIntPaser(menuNameAndNumber[1]);
+                Menu orderedMenu = Menu.findMenu(menuName);
 
-                orderDetails.add(new OrderedMenu(menuNameAndNumber[0], count));
+                validDuplicateMenu(orderedMenu);
+                validOrderFormat(menuNameAndNumber);
+                orderDetails.put(orderedMenu, menuNumber);
             }
             validOnlyBeverage();
         } catch (Exception e) {
@@ -32,10 +35,9 @@ public class Order {
         }
     }
 
-    private void validDuplicateMenu(List<OrderedMenu> orderDetails, String menuName) {
-        for (OrderedMenu order : orderDetails) {
-            if (order.getMenu().getMenuItem().getName().equals(menuName))
-                throw new IllegalArgumentException();
+    private void validDuplicateMenu(Menu orderedMenu) {
+        if (orderDetails.containsKey(orderedMenu)) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -44,23 +46,29 @@ public class Order {
     }
 
     private void validOnlyBeverage() {
-        for (OrderedMenu order : orderDetails) {
-            if (!order.getMenu().getMenuItem()
-                    .getMenuType().equals(NON_PERMIT_SINGLE_MENU_TYPE)) return;
+        for (Map.Entry<Menu, Integer> entry : orderDetails.entrySet()) {
+            Menu menu = entry.getKey();
+            if (!menu.getMenuItem().getMenuType().equals(NON_PERMIT_SINGLE_MENU_TYPE)) {
+                return;
+            }
         }
-
         throw new IllegalArgumentException();
     }
 
     public String toString() {
-        String output = "";
-        for (OrderedMenu order : orderDetails) {
-            output += (order.getMenu().getMenuItem().getName() + " " + order.getCount() + "개\n");
+        StringBuilder output = new StringBuilder();
+        for (Map.Entry<Menu, Integer> entry : orderDetails.entrySet()) {
+            Menu menu = entry.getKey();
+            int count = entry.getValue();
+            output.append(menu.getMenuItem().getName())
+                    .append(" ")
+                    .append(count)
+                    .append("개\n");
         }
-        return output;
+        return output.toString();
     }
 
-    public List<OrderedMenu> getOrderDetails() {
+    public Map<Menu, Integer> getOrderDetails() {
         return orderDetails;
     }
 }

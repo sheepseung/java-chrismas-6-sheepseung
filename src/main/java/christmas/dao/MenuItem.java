@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dao;
 
 public class MenuItem {
     private final String name;
