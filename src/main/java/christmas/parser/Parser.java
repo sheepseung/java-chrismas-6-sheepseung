@@ -15,7 +15,7 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
-    public static List<String> inputToEachOrder(String input) {
+    public static List<String> inputToEachOrderedMenu(String input) {
         return Arrays.stream(input.split(INPUT_TO_EACH_ORDER_REGEX)).toList();
     }
 

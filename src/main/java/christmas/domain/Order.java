@@ -13,17 +13,17 @@ public class Order {
     private static final String NON_PERMIT_SINGLE_MENU_TYPE = "beverage";
 
     public void takeOrder(String input) {
-        List<String> eachOrder = Parser.inputToEachOrder(input);
+        List<String> eachOrderedMenu = Parser.inputToEachOrderedMenu(input);
 
         try {
-            for (String orderInformation : eachOrder) {
-                String[] menuInformation = Parser.inputToMenu(orderInformation);
+            for (String menuInformation : eachOrderedMenu) {
+                String[] menuNameAndNumber = Parser.inputToMenu(menuInformation);
 
-                validDuplicateMenu(orderDetails, menuInformation[0]);
-                validOrderFormat(menuInformation);
-                int count = Parser.stringToIntPaser(menuInformation[1]);
+                validDuplicateMenu(orderDetails, menuNameAndNumber[0]);
+                validOrderFormat(menuNameAndNumber);
+                int count = Parser.stringToIntPaser(menuNameAndNumber[1]);
 
-                orderDetails.add(new OrderedMenu(menuInformation[0], count));
+                orderDetails.add(new OrderedMenu(menuNameAndNumber[0], count));
             }
             validOnlyBeverage();
         } catch (Exception e) {
