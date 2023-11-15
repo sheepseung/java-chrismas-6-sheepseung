@@ -5,21 +5,19 @@ import christmas.domain.DecemberCalendar;
 import christmas.domain.Order;
 import christmas.domain.ReservationDay;
 import christmas.enums.Badge;
-import christmas.enums.EventMessage;
 import christmas.enums.EventSettings;
 import christmas.enums.Menu;
+import christmas.parser.EventDetailsParser;
 import christmas.view.EventView;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Map;
 
 public class ChristmasEventController implements EventController {
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###");
 
-    private String discountDetails = "";
+    private String eventDetails = "";
     private boolean canPresent = false;
     private BigDecimal totalBenefitAmount = new BigDecimal(0);
 
@@ -38,15 +36,11 @@ public class ChristmasEventController implements EventController {
     private void presentEvent(Bill bill) {
         if (bill.getTotalPrice().compareTo(EventSettings.PRESENT_STANDARD_AMOUNT.getAmount()) == 1) {
             canPresent = true;
-            addContentsPresentEvent(EventSettings.PRESENT_VALUE.getAmount());
-            totalBenefitAmount = totalBenefitAmount.add(EventSettings.PRESENT_VALUE.getAmount());
-        }
-    }
+            BigDecimal benefitValue = EventSettings.PRESENT_VALUE.getAmount();
 
-    private void addContentsPresentEvent(BigDecimal discountValue) {
-        String discountDetail = (EventMessage.PRESENT_DISCOUNT_MESSAGE.getMessage()
-                + DECIMAL_FORMAT.format(discountValue) + "원\n");
-        discountDetails += discountDetail;
+            totalBenefitAmount = totalBenefitAmount.add(benefitValue);
+            eventDetails += EventDetailsParser.parsePresentEventDetail(benefitValue);
+        }
     }
 
     private void dDayDiscountEvent(ReservationDay reservationDay, Bill bill) {
@@ -57,37 +51,23 @@ public class ChristmasEventController implements EventController {
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            addContentsDDayDiscountEvent(discountValue);
+            eventDetails += EventDetailsParser.parseDDayDiscountEventDetail(discountValue);
         }
-    }
-
-    private void addContentsDDayDiscountEvent(BigDecimal discountValue) {
-        String discountDetail = (EventMessage.D_DAY_DISCOUNT_MESSAGE.getMessage()
-                + DECIMAL_FORMAT.format(discountValue) + "원\n");
-        discountDetails += discountDetail;
     }
 
     private void weekdayDiscountEvent(ReservationDay day, Bill bill) {
         if (decemberCalendar.isWeekday(day.getDay())) {
-            long count = orderDetails.entrySet().stream()
+            long dessertCount = orderDetails.entrySet().stream()
                     .filter(entry -> WEEKDAY_DISCOUNT_TYPE.equals(entry.getKey().getMenuItem().getMenuType()))
                     .mapToLong(Map.Entry::getValue)
                     .sum();
 
-            BigDecimal discountValue = new BigDecimal(count)
+            BigDecimal discountValue = new BigDecimal(dessertCount)
                     .multiply(EventSettings.STANDARD_DISCOUNT_VALUE.getAmount());
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            addContentsWeekdayDiscountEvent(discountValue);
-        }
-    }
-
-    private void addContentsWeekdayDiscountEvent(BigDecimal discountValue) {
-        if (discountValue.compareTo(new BigDecimal(0)) != 0) {
-            String discountDetail = (EventMessage.WEEKDAY_DISCOUNT_MESSAGE.getMessage()
-                    + DECIMAL_FORMAT.format(discountValue) + "원\n");
-            discountDetails += discountDetail;
+            eventDetails += EventDetailsParser.parseWeekdayDiscountEventDetail(discountValue);
         }
     }
 
@@ -103,15 +83,7 @@ public class ChristmasEventController implements EventController {
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            addContentsWeekendDiscountEvent(discountValue);
-        }
-    }
-
-    private void addContentsWeekendDiscountEvent(BigDecimal discountValue) {
-        if (discountValue.compareTo(new BigDecimal(0)) != 0) {
-            String discountDetail = (EventMessage.WEEKEND_DISCOUNT_MESSAGE.getMessage()
-                    + DECIMAL_FORMAT.format(discountValue) + "원\n");
-            discountDetails += discountDetail;
+            eventDetails += EventDetailsParser.parseWeekendDiscountEventDetail(discountValue);
         }
     }
 
@@ -121,21 +93,13 @@ public class ChristmasEventController implements EventController {
 
             bill.discountPrice(discountValue);
             totalBenefitAmount = totalBenefitAmount.add(discountValue);
-            addContentsSpecialDayDiscountEvent(discountValue);
-        }
-    }
-
-    private void addContentsSpecialDayDiscountEvent(BigDecimal discountValue) {
-        if (discountValue.compareTo(new BigDecimal(0)) == 1) {
-            String discountDetail = (EventMessage.SPECIAL_DAY_DISCOUNT_MESSAGE.getMessage()
-                    + DECIMAL_FORMAT.format(discountValue) + "원\n");
-            discountDetails += discountDetail;
+            eventDetails += EventDetailsParser.paresSpecialDayDiscountEventDetail(discountValue);
         }
     }
 
     public void showEventDiscountDetails() {
         EventView.printPresentDetails(canPresent);
-        EventView.printEventDiscountDetails(discountDetails);
+        EventView.printEventDiscountDetails(eventDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
         EventView.printBadge(Badge.getBadge(totalBenefitAmount));
     }
