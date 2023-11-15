@@ -41,7 +41,7 @@ public class EventDetailsParser {
     public static String paresSpecialDayDiscountEventDetail(BigDecimal discountValue) {
         if (discountValue.compareTo(new BigDecimal(0)) == 1) {
             String discountDetail = (EventMessage.SPECIAL_DAY_DISCOUNT_MESSAGE.getMessage()
-                 + (DECIMAL_FORMAT.format(discountValue) + "원\n"));
+                    + (DECIMAL_FORMAT.format(discountValue) + "원\n"));
             return discountDetail;
         }
         return EventMessage.NO_APPLIED_VALUE.getMessage();

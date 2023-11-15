@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;
 import christmas.parser.Parser;
 
@@ -10,8 +11,7 @@ public class ReservationDay {
         try {
             this.day = Parser.stringToIntPaser(dayInput);
             validateDay(day);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
         }
     }

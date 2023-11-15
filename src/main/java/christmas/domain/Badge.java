@@ -16,7 +16,7 @@ public enum Badge {
     }
 
     public String getName() {
-        if(this == null) return "";
+        if (this == null) return "";
         return name;
     }
 
