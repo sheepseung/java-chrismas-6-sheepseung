@@ -1,19 +1,20 @@
 package christmas.domain;
 
-import christmas.dto.OrderedMenu;
 import christmas.enums.ErrorMessage;
+import christmas.enums.Menu;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class Bill {
     private static final int MAXIMUM_QUANTITY = 20;
+    private final Map<Menu, Integer> orderDetails;
 
-    private final Order order;
     private BigDecimal totalPrice = new BigDecimal(0);
     private int quantity = 0;
 
     public Bill(Order order) {
-        this.order = order;
+        this.orderDetails = order.getOrderDetails();
         calculateTotalPrice();
         calculateMenuQuantity();
         try {
@@ -24,16 +25,17 @@ public class Bill {
     }
 
     private void calculateTotalPrice() {
-        for (OrderedMenu orderedMenu : order.getOrderDetails()) {
-            BigDecimal price = (orderedMenu.getMenu().getPrice())
-                    .multiply(BigDecimal.valueOf(orderedMenu.getCount()));
+        for (Map.Entry<Menu, Integer> entry : orderDetails.entrySet()) {
+            Menu menu = entry.getKey();
+            int count = entry.getValue();
+            BigDecimal price = menu.getPrice().multiply(BigDecimal.valueOf(count));
             totalPrice = totalPrice.add(price);
         }
     }
 
     private void calculateMenuQuantity() {
-        for (OrderedMenu orderedMenu : order.getOrderDetails()) {
-            quantity += orderedMenu.getCount();
+        for (int count : orderDetails.values()) {
+            quantity += count;
         }
     }
 
