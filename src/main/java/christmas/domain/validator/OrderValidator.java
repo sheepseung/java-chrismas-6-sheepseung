@@ -19,6 +19,7 @@ public class OrderValidator {
             throw new IllegalArgumentException();
         }
     }
+
     public static void validateOrderFormat(String[] menuInfo) {
         if (menuInfo.length != 2) throw new IllegalArgumentException();
     }

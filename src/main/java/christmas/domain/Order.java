@@ -16,9 +16,9 @@ public class Order {
     public void takeOrder(String input) {
         List<String> eachOrderedMenu = Parser.inputToEachOrderedMenu(input);
         try {
-            calculateMenuQuantity();
-
             eachOrderedMenu.forEach(menuInformation -> processOrderedMenu(menuInformation));
+
+            calculateMenuQuantity();
             validateOnlyBeverage(orderDetails);
             validateMaximumQuantity(quantity);
         } catch (Exception e) {
