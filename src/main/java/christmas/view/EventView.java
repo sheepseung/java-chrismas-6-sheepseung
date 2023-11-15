@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class EventView {
 
     public static void printPriceBeforeDiscount(Bill bill) {
-        System.out.printf(EventMessage.BEFORE_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(),
+        System.out.printf(EventMessage.BEFORE_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage() + "\n",
                 Parser.BigDecimalToFormmatedString(bill.getTotalPrice()));
     }
 
@@ -41,7 +41,7 @@ public class EventView {
     }
 
     public static void printPriceAfterDiscount(Bill bill, BigDecimal totalBenefitAmount) {
-        System.out.printf(EventMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage(),
+        System.out.printf(EventMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage() + "\n",
                 Parser.BigDecimalToFormmatedString(bill.getTotalPrice()
                         .subtract(totalBenefitAmount)));
     }

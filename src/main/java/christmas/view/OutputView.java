@@ -10,11 +10,11 @@ public class OutputView {
     }
 
     public static void printEventPreviewMessage(int day) {
-        System.out.printf(OutputMessage.EVENT_PREVIEW_OUTPUT_MESSAGE.getMessage(), day);
+        System.out.printf(OutputMessage.EVENT_PREVIEW_OUTPUT_MESSAGE.getMessage()+"\n", day);
     }
 
     public static void printOrderDetails(Order orders) {
-        System.out.print(OutputMessage.ORDER_DETAILS_OUTPUT_MESSAGE.getMessage() + orders.toString());
+        System.out.println(OutputMessage.ORDER_DETAILS_OUTPUT_MESSAGE.getMessage() + orders.toString());
     }
 
 }
