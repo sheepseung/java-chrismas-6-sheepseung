@@ -1,11 +1,7 @@
 package christmas.controller;
 
-import christmas.domain.Bill;
-import christmas.domain.DecemberCalendar;
-import christmas.domain.Order;
-import christmas.domain.ReservationDay;
+import christmas.domain.*;
 import christmas.enums.EventSettings;
-import christmas.domain.Menu;
 import christmas.parser.EventDetailsParser;
 import christmas.view.EventView;
 
@@ -20,6 +16,7 @@ public class ChristmasEventController implements EventController {
     private boolean canPresent = false;
     private BigDecimal totalBenefitAmount = new BigDecimal(0);
     private Map<Menu, Integer> orderDetails;
+    private Badge badge;
     private String eventResultDetails = "";
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
@@ -29,6 +26,7 @@ public class ChristmasEventController implements EventController {
         weekdayDiscountEvent(reservationDay, bill);
         weekendDiscountEvent(reservationDay, bill);
         specialDayDiscountEvent(reservationDay, bill);
+        badgeEvent(totalBenefitAmount);
     }
 
     private void presentEvent(Bill bill) {
@@ -93,11 +91,16 @@ public class ChristmasEventController implements EventController {
         }
     }
 
+    private void badgeEvent(BigDecimal totalBenefitAmount){
+        badge = Badge.getBadge(totalBenefitAmount);
+    }
+
     public void showEventDiscountDetails(Bill bill) {
         EventView.printPriceBeforeDiscount(bill);
         EventView.printPresentDetails(canPresent);
         EventView.printEventResultDetails(eventResultDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
         EventView.printPriceAfterDiscount(bill, totalBenefitAmount);
+        EventView.printBadge(badge.getName());
     }
 }

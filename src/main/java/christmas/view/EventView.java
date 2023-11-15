@@ -47,8 +47,8 @@ public class EventView {
     }
 
     public static void printBadge(String badge) {
-        System.out.printf(EventMessage.BADGE_EVENT_MESSAGE.getMessage());
+        System.out.println(EventMessage.BADGE_EVENT_MESSAGE.getMessage());
         if (badge == null) System.out.println(EventMessage.NO_APPLIED_VALUE);
-        System.out.println(badge + '\n');
+        System.out.print(badge);
     }
 }
