@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 
 public class EventView {
 
-    public static void printPriceBeforeDiscount(Bill bill) {
+    public static void printPriceBeforeDiscount(BigDecimal beforeEventApplied) {
         System.out.printf(EventMessage.BEFORE_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage() + "\n",
-                Parser.BigDecimalToFormmatedString(bill.getTotalPrice()));
+                Parser.BigDecimalToFormmatedString(beforeEventApplied));
     }
 
     public static void printPresentDetails(boolean canPresent) {
@@ -41,10 +41,9 @@ public class EventView {
         System.out.println(EventMessage.NO_APPLIED_VALUE.getMessage());
     }
 
-    public static void printPriceAfterDiscount(Bill bill, BigDecimal totalBenefitAmount) {
+    public static void printPriceAfterDiscount(Bill bill) {
         System.out.printf(EventMessage.AFTER_DISCOUNT_PRICE_OUTPUT_MESSAGE.getMessage() + "\n",
-                Parser.BigDecimalToFormmatedString(bill.getTotalPrice()
-                        .subtract(totalBenefitAmount)));
+                Parser.BigDecimalToFormmatedString(bill.getTotalPrice()));
     }
 
     public static void printBadge(Badge badge) {

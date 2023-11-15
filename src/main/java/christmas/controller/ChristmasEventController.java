@@ -11,6 +11,7 @@ import java.util.Map;
 public class ChristmasEventController implements EventController {
     private static final String WEEKDAY_DISCOUNT_TYPE = "dessert";
     private static final String WEEKEND_DISCOUNT_TYPE = "main";
+    private static final BigDecimal EVENT_APPLY_STAND = new BigDecimal(10000);
     private static final DecemberCalendar decemberCalendar = new DecemberCalendar();
 
     private boolean canPresent = false;
@@ -18,15 +19,19 @@ public class ChristmasEventController implements EventController {
     private Map<Menu, Integer> orderDetails;
     private Badge badge;
     private String eventResultDetails = "";
+    private BigDecimal beforeEventApplied;
 
     public void applyEvent(ReservationDay reservationDay, Order order, Bill bill) {
-        this.orderDetails = order.getOrderDetails();
-        presentEvent(bill);
-        dDayDiscountEvent(reservationDay, bill);
-        weekdayDiscountEvent(reservationDay, bill);
-        weekendDiscountEvent(reservationDay, bill);
-        specialDayDiscountEvent(reservationDay, bill);
-        badgeEvent(totalBenefitAmount);
+        beforeEventApplied = bill.getTotalPrice();
+        if(bill.getTotalPrice().compareTo(EVENT_APPLY_STAND) >= 0) {
+            this.orderDetails = order.getOrderDetails();
+            presentEvent(bill);
+            dDayDiscountEvent(reservationDay, bill);
+            weekdayDiscountEvent(reservationDay, bill);
+            weekendDiscountEvent(reservationDay, bill);
+            specialDayDiscountEvent(reservationDay, bill);
+            badgeEvent(totalBenefitAmount);
+        }
     }
 
     private void presentEvent(Bill bill) {
@@ -96,11 +101,11 @@ public class ChristmasEventController implements EventController {
     }
 
     public void showEventDiscountDetails(Bill bill) {
-        EventView.printPriceBeforeDiscount(bill);
+        EventView.printPriceBeforeDiscount(beforeEventApplied);
         EventView.printPresentDetails(canPresent);
         EventView.printEventResultDetails(eventResultDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
-        EventView.printPriceAfterDiscount(bill, totalBenefitAmount);
+        EventView.printPriceAfterDiscount(bill);
         EventView.printBadge(badge);
     }
 }
