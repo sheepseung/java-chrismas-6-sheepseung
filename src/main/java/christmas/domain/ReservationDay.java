@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;
 import christmas.parser.Parser;
 
@@ -13,8 +12,7 @@ public class ReservationDay {
             validateDay(day);
         }
         catch (Exception e){
-            System.out.println(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
-            reserveDay(Console.readLine());
+            throw new IllegalArgumentException(ErrorMessage.INPUT_DAY_ERROR_MESSAGE.getMessage());
         }
     }
 

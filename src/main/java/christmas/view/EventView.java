@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Badge;
 import christmas.domain.Bill;
 import christmas.enums.EventMessage;
 import christmas.parser.Parser;
@@ -46,9 +47,12 @@ public class EventView {
                         .subtract(totalBenefitAmount)));
     }
 
-    public static void printBadge(String badge) {
+    public static void printBadge(Badge badge) {
         System.out.println(EventMessage.BADGE_EVENT_MESSAGE.getMessage());
-        if (badge == null) System.out.println(EventMessage.NO_APPLIED_VALUE);
-        System.out.print(badge);
+        if (badge == null) {
+            System.out.print(EventMessage.NO_APPLIED_VALUE.getMessage());
+            return;
+        }
+        System.out.print(badge.getName());
     }
 }

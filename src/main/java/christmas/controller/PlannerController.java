@@ -37,12 +37,28 @@ public class PlannerController {
     }
 
     private void inputDay() {
-        String dayInput = InputView.inputDate();
-        reservationDay.reserveDay(dayInput);
+        while (true) {
+            try {
+                String dayInput = InputView.inputDate();
+                reservationDay.reserveDay(dayInput);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+            break;
+        }
     }
 
     private void inputOrder() {
-        String orderInput = InputView.inputOrder();
-        order.takeOrder(orderInput.replace(" ", ""));
+        while (true) {
+            try {
+                String orderInput = InputView.inputOrder();
+                order.takeOrder(orderInput.replace(" ", ""));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+            break;
+        }
     }
 }

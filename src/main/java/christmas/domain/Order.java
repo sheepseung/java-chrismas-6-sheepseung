@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import camp.nextstep.edu.missionutils.Console;
 import christmas.enums.ErrorMessage;
 import christmas.parser.Parser;
 
@@ -14,7 +13,6 @@ public class Order {
 
     public void takeOrder(String input) {
         List<String> eachOrderedMenu = Parser.inputToEachOrderedMenu(input);
-
         try {
             for (String menuInformation : eachOrderedMenu) {
                 String[] menuNameAndNumber = Parser.inputToMenu(menuInformation);
@@ -29,8 +27,7 @@ public class Order {
             }
             validOnlyBeverage();
         } catch (Exception e) {
-            System.out.println(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
-            takeOrder(Console.readLine());
+            throw new IllegalArgumentException(ErrorMessage.ORDER_ERROR_MESSAGE.getMessage());
         }
     }
 

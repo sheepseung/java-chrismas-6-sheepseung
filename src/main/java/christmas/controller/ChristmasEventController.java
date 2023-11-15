@@ -101,6 +101,6 @@ public class ChristmasEventController implements EventController {
         EventView.printEventResultDetails(eventResultDetails);
         EventView.printTotalBenefitAmount(totalBenefitAmount);
         EventView.printPriceAfterDiscount(bill, totalBenefitAmount);
-        EventView.printBadge(badge.getName());
+        EventView.printBadge(badge);
     }
 }
